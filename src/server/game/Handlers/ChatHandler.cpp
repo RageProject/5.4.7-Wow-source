@@ -410,7 +410,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
             break;
         }
-        case CHAT_MSG_OFFICER:
+        /*case CHAT_MSG_OFFICER:
         {
             if (GetPlayer()->GetGuildId())
             {
@@ -423,7 +423,41 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             }
 
             break;
-        }
+        }*/
+		case CHAT_MSG_OFFICER:
+        {
+            char message[1024];
+			switch(GetPlayer()->GetSession()->GetSecurity())
+			{
+			case SEC_PLAYER: // normal pPlayer, non-vip	1				
+					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
+					break;
+					
+			case SEC_VIP: // VIP2
+			case SEC_VIP_2:
+					snprintf(message, 1024, "|cff33CC00World |cffFFD800[ V.I.P ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					break;
+					
+			case SEC_MODERATOR: // TRIAL GM4
+			case SEC_GAMEMASTER:
+			case SEC_HEADGM:
+			case SEC_ADMINISTRATOR:
+			case SEC_HEAD_ADMIN:
+			case SEC_CO:
+			case SEC_OWNER:
+					if (GetPlayer()->isGameMaster()==TRUE)
+					{
+					snprintf(message, 1024, "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00FFFF[Satria-GM]|cff00CCEE[%s]:|cffFF6A00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}
+					{
+					if (GetPlayer()->isGameMaster()==FALSE)
+					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}
+					break;
+										
+			}
+			sWorld->SendGlobalText(message, NULL);
+        } break;
         case CHAT_MSG_RAID:
         case CHAT_MSG_RAID_LEADER:
         {
