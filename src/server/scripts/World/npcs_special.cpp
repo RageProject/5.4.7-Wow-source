@@ -4817,8 +4817,8 @@ class npc_void_tendrils : public CreatureScript
 
             void Reset()
             {
-				if (!me->HasAura(SPELL_ROOT_FOR_EVER))
-					me->AddAura(SPELL_ROOT_FOR_EVER, me);
+				//if (!me->HasAura(SPELL_ROOT_FOR_EVER))
+					//me->AddAura(SPELL_ROOT_FOR_EVER, me);
             }
 
             void SetGUID(uint64 guid, int32)
@@ -4845,7 +4845,7 @@ class npc_void_tendrils : public CreatureScript
                     me->SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, 0.0f);
                     me->SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, 0.0f);
 
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
                 }
                 else
                     me->DespawnOrUnsummon();
@@ -4942,8 +4942,8 @@ class npc_spectral_guise : public CreatureScript
 
             void Reset()
             {
-                if (!me->HasAura(SPELL_ROOT_FOR_EVER))
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                //if (!me->HasAura(SPELL_ROOT_FOR_EVER))
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
             }
 
             void IsSummonedBy(Unit* owner)
@@ -4954,7 +4954,7 @@ class npc_spectral_guise : public CreatureScript
                     me->SetMaxHealth(owner->GetMaxHealth() / 2);
                     me->SetHealth(me->GetMaxHealth());
 
-                    owner->AddAura(SPELL_INITIALIZE_IMAGES, me);
+                    //owner->AddAura(SPELL_INITIALIZE_IMAGES, me);
                     owner->AddAura(SPELL_SPECTRAL_GUISE_CLONE, me);
 
                     me->CastSpell(me, SPELL_SPECTRAL_GUISE_CHARGES, true);
@@ -4972,7 +4972,7 @@ class npc_spectral_guise : public CreatureScript
                     me->SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, 0.0f);
                     me->SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, 0.0f);
 
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
                 }
                 else
                     me->DespawnOrUnsummon();
