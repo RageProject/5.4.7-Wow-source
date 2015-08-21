@@ -410,7 +410,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
             break;
         }
-        /*case CHAT_MSG_OFFICER:
+        case CHAT_MSG_OFFICER:
         {
             if (GetPlayer()->GetGuildId())
             {
@@ -423,8 +423,8 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             }
 
             break;
-        }*/
-		case CHAT_MSG_OFFICER:
+        }
+		/*case CHAT_MSG_OFFICER:
         {
             char message[1024];
 			switch(GetPlayer()->GetSession()->GetSecurity())
@@ -457,7 +457,8 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 										
 			}
 			sWorld->SendGlobalText(message, NULL);
-        } break;
+        } break;*/
+
         case CHAT_MSG_RAID:
         case CHAT_MSG_RAID_LEADER:
         {
