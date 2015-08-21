@@ -708,16 +708,27 @@ void AddSC_spine_of_deathwing();
 void AddSC_madness_of_deathwing();
 
 // Pandaria
+// Heart of Fear
+void AddSC_instance_heart_of_fear();
+void AddSC_boss_ambershaper_unsok();
+void AddSC_boss_blade_lord_tayak();
+void AddSC_boss_garalon();
+void AddSC_boss_grand_empress_shekzeer();
+void AddSC_boss_imperial_vizier_zorlok();
+void AddSC_boss_wind_lord_meljarak();
+
 void AddSC_instance_temple_of_jade_serpent();       // Temple of Jade Serpent
 void AddSC_boss_wise_mari();
 void AddSC_boss_lorewalker_stonestep();
 void AddSC_boss_liu_flameheat();
 void AddSC_boss_sha_of_doubt();
+
 void AddSC_boss_hoptallus();           // The Stormstout Brewery
 void AddSC_boss_ook_ook();
 void AddSC_boss_yan_zhu_the_uncasked();
 void AddSC_instance_stormstout_brewery();
 void AddSC_stormstout_brewery();
+
 void AddSC_instance_gate_setting_sun();             // Gate of the Setting Sun
 void AddSC_gate_setting_sun();
 void AddSC_boss_saboteur_kiptilak();
@@ -729,19 +740,23 @@ void AddSC_boss_galion();
 void AddSC_boss_chi_ji();
 void AddSC_boss_nalak();
 void AddSC_boss_ordos();
+
 void AddSC_instance_mogu_shan_palace();             // Mogu'Shan Palace
 void AddSC_boss_trial_of_the_king();
 void AddSC_boss_gekkan();
 void AddSC_boss_xin_the_weaponmaster();
+
 void AddSC_instance_shadopan_monastery();           // Shadopan Monastery
 void AddSC_shadopan_monastery();
 void AddSC_boss_gu_cloudstrike();
 void AddSC_boss_master_snowdrift();
 void AddSC_boss_sha_of_violence();
 void AddSC_boss_taran_zhu();
+
 void AddSC_instance_siege_of_the_niuzoa_temple();   // Siege of the Niuzoa Temple
 void AddSC_siege_of_the_niuzoa_temple();
 void AddSC_boss_jinbak();
+
 void AddSC_instance_mogu_shan_vault();              // Mogu'Shan Vault
 void AddSC_mogu_shan_vault();
 void AddSC_boss_stone_guard();
@@ -1504,6 +1519,15 @@ void AddNorthrendScripts()
 void AddPandarieScripts()
 {
 #ifdef SCRIPTS
+// Heart of Fear
+	AddSC_instance_heart_of_fear();
+	AddSC_boss_ambershaper_unsok();
+	AddSC_boss_blade_lord_tayak();
+	AddSC_boss_garalon();
+	AddSC_boss_grand_empress_shekzeer();
+	AddSC_boss_imperial_vizier_zorlok();
+	AddSC_boss_wind_lord_meljarak();
+	
     AddSC_instance_temple_of_jade_serpent();        // Temple of Jade Serpent
     AddSC_boss_wise_mari();
     AddSC_boss_lorewalker_stonestep();

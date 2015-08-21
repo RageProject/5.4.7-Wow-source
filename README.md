@@ -1,11 +1,11 @@
-# ![logo](http://wowsource.info/public/style_images/1_cooltext1537712788.gif)
+Updated by ZIE on this Source and use for public user !!
 
-# WoWSource Core
+# WoWSource Core ?? LOL
 
 
 ##Project General Information
 
-Cataclysm 5.4.8 Emulator - V1
+MOP5.4.8 Emulator - V1
 
 - Level 90
 - Fixes Daily

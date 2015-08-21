@@ -69,6 +69,15 @@ set(scripts_STAT_SRCS
   Pandaria/WanderingIsland/WanderingIsland_East.cpp
   Pandaria/WanderingIsland/WanderingIsland_West.cpp
   Pandaria/WanderingIsland/WanderingIsland_South.cpp
+  
+  Pandaria/HeartofFear/heart_of_fear.h
+  Pandaria/HeartofFear/instance_heart_of_fear.cpp
+  Pandaria/HeartofFear/boss_ambershaper_unsok.cpp
+  Pandaria/HeartofFear/boss_blade_lord_tayak.cpp
+  Pandaria/HeartofFear/boss_garalon.cpp
+  Pandaria/HeartofFear/boss_grand_empress_shekzeer.cpp
+  Pandaria/HeartofFear/boss_imperial_vizier_zorlok.cpp
+  Pandaria/HeartofFear/boss_wind_lord_meljarak.cpp
 
   Pandaria/townlong_steppes.cpp
   Pandaria/dread_wastes.cpp
