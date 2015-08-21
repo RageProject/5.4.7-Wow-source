@@ -1,11 +1,11 @@
-Updated by ZIE on this Source and use for public user !!
+Updated by ZIE and use for public user !!
+I not give any support in this Source.. any error fix by your self.
 
 # WoWSource Core ?? LOL
 
-
 ##Project General Information
 
-MOP5.4.8 Emulator - V1
+MOP 5.4.8 Emulator - V1
 
 - Level 90
 - Fixes Daily
