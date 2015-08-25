@@ -78,6 +78,13 @@ set(scripts_STAT_SRCS
   Pandaria/HeartofFear/boss_grand_empress_shekzeer.cpp
   Pandaria/HeartofFear/boss_imperial_vizier_zorlok.cpp
   Pandaria/HeartofFear/boss_wind_lord_meljarak.cpp
+  
+  Pandaria/TerraceofEndlessSpring/terrace_of_the_endless_spring.h
+  Pandaria/TerraceofEndlessSpring/instance_terrace_of_the_endless_spring.cpp
+  Pandaria/TerraceofEndlessSpring/boss_lei_shi.cpp
+  Pandaria/TerraceofEndlessSpring/boss_protectors_of_the_endless.cpp
+  Pandaria/TerraceofEndlessSpring/boss_sha_of_fear.cpp
+  Pandaria/TerraceofEndlessSpring/boss_tsulong.cpp
 
   Pandaria/townlong_steppes.cpp
   Pandaria/dread_wastes.cpp

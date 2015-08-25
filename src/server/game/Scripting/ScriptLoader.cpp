@@ -766,6 +766,13 @@ void AddSC_boss_spirit_kings();
 void AddSC_boss_elegon();
 void AddSC_boss_will_of_emperor();
 
+// Terrace of Endless Spring
+void AddSC_instance_terrace_of_the_endless_spring();
+void AddSC_boss_lei_shi();
+void AddSC_boss_protectors_of_the_endless();
+void AddSC_boss_sha_of_fear();
+void AddSC_boss_tsulong();
+
 void AddSC_townlong_steppes();
 void AddSC_dread_wastes();
 void AddSC_valley_of_the_four_winds();
@@ -1533,35 +1540,42 @@ void AddPandarieScripts()
     AddSC_boss_lorewalker_stonestep();
     AddSC_boss_liu_flameheat();
     AddSC_boss_sha_of_doubt();
+
     AddSC_boss_hoptallus();           // The Stormstout Brewery
     AddSC_boss_ook_ook();
     AddSC_boss_yan_zhu_the_uncasked();
     AddSC_instance_stormstout_brewery();
     AddSC_stormstout_brewery();
+
     AddSC_instance_mogu_shan_palace();              // The Mogu'Shan Palace
     AddSC_boss_trial_of_the_king();
     AddSC_boss_gekkan();
     AddSC_boss_xin_the_weaponmaster();
+
     AddSC_instance_gate_setting_sun();              // Gate of the Setting Sun
     AddSC_gate_setting_sun();
     AddSC_boss_saboteur_kiptilak();
     AddSC_boss_striker_gadok();
     AddSC_boss_commander_rimok();
     AddSC_boss_raigonn();
+
     AddSC_boss_sha_of_anger();                      // Pandaria World Bosses
     AddSC_boss_galion();
     AddSC_boss_chi_ji();
     AddSC_boss_nalak();
     AddSC_boss_ordos();
+
     AddSC_instance_shadopan_monastery();            // Shadopan Monastery
     AddSC_shadopan_monastery();
     AddSC_boss_gu_cloudstrike();
     AddSC_boss_master_snowdrift();
     AddSC_boss_sha_of_violence();
     AddSC_boss_taran_zhu();
+
     AddSC_instance_siege_of_the_niuzoa_temple();    // Siege of the Niuzoa Temple
     AddSC_siege_of_the_niuzoa_temple();
     AddSC_boss_jinbak();
+
     AddSC_instance_mogu_shan_vault();               // Mogu'Shan Vault
     AddSC_mogu_shan_vault();
     AddSC_boss_stone_guard();
@@ -1571,6 +1585,12 @@ void AddPandarieScripts()
     AddSC_boss_elegon();
     AddSC_boss_will_of_emperor();
 
+	// Terrace of Endless Spring
+	AddSC_instance_terrace_of_the_endless_spring();
+	AddSC_boss_lei_shi();
+	AddSC_boss_protectors_of_the_endless();
+	AddSC_boss_sha_of_fear();
+	AddSC_boss_tsulong();
 
     AddSC_townlong_steppes();
     AddSC_dread_wastes();
