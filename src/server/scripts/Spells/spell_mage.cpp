@@ -572,7 +572,7 @@ class spell_mage_arcane_barrage : public SpellScriptLoader
                             target->GetAttackableUnitListInRange(targetList, 10.0f);
                             targetList.remove_if(CheckArcaneBarrageImpactPredicate(_player, target));
 
-                            WoWSource::Containers::RandomResizeList(targetList, chargeCount);
+                            TrinityCore::Containers::RandomResizeList(targetList, chargeCount);
 
                             for (auto itr : targetList)
                                 target->CastCustomSpell(itr, SPELL_MAGE_ARCANE_BARRAGE_TRIGGERED, &bp, NULL, NULL, true, 0, NULLAURA_EFFECT, _player->GetGUID());
@@ -806,7 +806,7 @@ class spell_mage_nether_tempest : public SpellScriptLoader
                         GetTarget()->GetAttackableUnitListInRange(targetList, 10.0f);
                         targetList.remove_if(CheckNetherImpactPredicate(_player, GetTarget()));
 
-                        WoWSource::Containers::RandomResizeList(targetList, 1);
+                        TrinityCore::Containers::RandomResizeList(targetList, 1);
 
                         for (auto itr : targetList)
                         {
@@ -1023,7 +1023,7 @@ class spell_mage_inferno_blast : public SpellScriptLoader
                         targetList.remove_if(CheckInfernoBlastImpactPredicate(_player, target));
 
                         if (targetList.size() > 2)
-                            WoWSource::Containers::RandomResizeList(targetList, 2);
+                            TrinityCore::Containers::RandomResizeList(targetList, 2);
 
                         for (auto itr : targetList)
                         {
@@ -1227,10 +1227,10 @@ class spell_mage_time_warp : public SpellScriptLoader
 
             void RemoveInvalidTargets(std::list<WorldObject*>& targets)
             {
-                targets.remove_if(WoWSource::UnitAuraCheck(true, HUNTER_SPELL_INSANITY));
-                targets.remove_if(WoWSource::UnitAuraCheck(true, SPELL_SHAMAN_EXHAUSTED));
-                targets.remove_if(WoWSource::UnitAuraCheck(true, SPELL_SHAMAN_SATED));
-                targets.remove_if(WoWSource::UnitAuraCheck(true, SPELL_MAGE_TEMPORAL_DISPLACEMENT));
+                targets.remove_if(TrinityCore::UnitAuraCheck(true, HUNTER_SPELL_INSANITY));
+                targets.remove_if(TrinityCore::UnitAuraCheck(true, SPELL_SHAMAN_EXHAUSTED));
+                targets.remove_if(TrinityCore::UnitAuraCheck(true, SPELL_SHAMAN_SATED));
+                targets.remove_if(TrinityCore::UnitAuraCheck(true, SPELL_MAGE_TEMPORAL_DISPLACEMENT));
             }
 
             void ApplyDebuff()

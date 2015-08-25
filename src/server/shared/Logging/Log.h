@@ -95,7 +95,7 @@ class Log
         uint32 realm;
         LogWorker* worker;
 
-        FILE* wowsourceLog;
+        FILE* TrinityCoreLog;
 };
 
 #define sLog ACE_Singleton<Log, ACE_Thread_Mutex>::instance()

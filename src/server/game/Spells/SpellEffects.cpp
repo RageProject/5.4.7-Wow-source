@@ -1242,7 +1242,7 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                     uint32 maxTargets = std::min<uint32>(3, attackers.size());
                     for (uint32 i = 0; i < maxTargets; ++i)
                     {
-                        Unit* attacker = WoWSource::Containers::SelectRandomContainerElement(attackers);
+                        Unit* attacker = TrinityCore::Containers::SelectRandomContainerElement(attackers);
                         AddUnitTarget(attacker, 1 << 1);
                         attackers.erase(attacker);
                     }
@@ -1519,8 +1519,8 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
         case 120165:// Conflagrate
         {
             UnitList friends;
-            WoWSource::AnyFriendlyUnitInObjectRangeCheck u_check(m_caster, m_caster, 5.0f);
-            WoWSource::UnitListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(m_caster, friends, u_check);
+            TrinityCore::AnyFriendlyUnitInObjectRangeCheck u_check(m_caster, m_caster, 5.0f);
+            TrinityCore::UnitListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(m_caster, friends, u_check);
             m_caster->VisitNearbyObject(5.0f, searcher);
 
             for (auto unit : friends)
@@ -3027,7 +3027,7 @@ void Spell::EffectEnergize(SpellEffIndex effIndex)
         if (!avalibleElixirs.empty())
         {
             // cast random elixir on target
-            m_caster->CastSpell(unitTarget, WoWSource::Containers::SelectRandomContainerElement(avalibleElixirs), true, m_CastItem);
+            m_caster->CastSpell(unitTarget, TrinityCore::Containers::SelectRandomContainerElement(avalibleElixirs), true, m_CastItem);
         }
     }
 }
@@ -8289,7 +8289,7 @@ void Spell::EffectCreateAreatrigger(SpellEffIndex effIndex)
 
                 if (!angelicFeatherList.empty())
                 {
-                    angelicFeatherList.sort(WoWSource::AreaTriggerDurationPctOrderPred());
+                    angelicFeatherList.sort(TrinityCore::AreaTriggerDurationPctOrderPred());
 
                     for (auto itr : angelicFeatherList)
                     {
@@ -8313,7 +8313,7 @@ void Spell::EffectCreateAreatrigger(SpellEffIndex effIndex)
 
                 if (!healingSphereList.empty())
                 {
-                    healingSphereList.sort(WoWSource::AreaTriggerDurationPctOrderPred());
+                    healingSphereList.sort(TrinityCore::AreaTriggerDurationPctOrderPred());
 
                     for (auto itr : healingSphereList)
                     {
@@ -8337,7 +8337,7 @@ void Spell::EffectCreateAreatrigger(SpellEffIndex effIndex)
 
                 if (!runeOfPowerList.empty())
                 {
-                    runeOfPowerList.sort(WoWSource::AreaTriggerDurationPctOrderPred());
+                    runeOfPowerList.sort(TrinityCore::AreaTriggerDurationPctOrderPred());
 
                     for (auto itr : runeOfPowerList)
                     {

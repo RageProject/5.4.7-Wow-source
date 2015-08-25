@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2015 WoWSource <http://wowsource.info/>
+ * Copyright (C) 2012-2015 TrinityCore <http://TrinityCore.info/>
  * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *

@@ -238,8 +238,8 @@ void CreatureGroup::LeaderMoveTo(float x, float y, float z)
         float dy = y +  std::sin(angle + pathangle) * dist;
         float dz = z;
 
-        WoWSource::NormalizeMapCoord(dx);
-        WoWSource::NormalizeMapCoord(dy);
+        TrinityCore::NormalizeMapCoord(dx);
+        TrinityCore::NormalizeMapCoord(dy);
 
         member->UpdateGroundPositionZ(dx, dy, dz);
 

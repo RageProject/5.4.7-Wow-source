@@ -300,7 +300,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
                             if (!targets.empty())
                             {
                                 num = targets.size();
-                                Unit* pSpawner = WoWSource::Containers::SelectRandomContainerElement(targets);
+                                Unit* pSpawner = TrinityCore::Containers::SelectRandomContainerElement(targets);
                                 if (Creature* pBlood = me->SummonCreature(NPC_CORRUPTED_BLOOD, *pSpawner))
                                     DoZoneInCombat(pBlood);
                             }
@@ -375,7 +375,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
             {
                 /*std::list<Player*> players;
                 AnyLivePlayerNoGmCheck check(me, 200.0f, true);
-                WoWSource::PlayerListSearcher<AnyLivePlayerNoGmCheck> searcher(me, players, check);
+                TrinityCore::PlayerListSearcher<AnyLivePlayerNoGmCheck> searcher(me, players, check);
                 me->VisitNearbyWorldObject(200.0f, searcher);
                 if (!players.empty())
                     for (std::list<Player*>::iterator itr = players.begin(); itr != players.end(); ++ itr)
@@ -459,7 +459,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
             {
                 Player* player = NULL;
                 AnyLivePlayerNoGmCheck check(me, 200.0f);
-                WoWSource::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
+                TrinityCore::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
                 me->VisitNearbyWorldObject(200.0f, searcher);
                 return (player ? true : false);
             }
@@ -1127,7 +1127,7 @@ class spell_spine_of_deathwing_searing_plasma_aoe : public SpellScriptLoader
                 if (targets.empty())
                     return;
                 
-                WoWSource::Containers::RandomResizeList(targets, 1);
+                TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -1319,10 +1319,10 @@ class spell_spine_of_deathwing_blood_corruption : public SpellScriptLoader
                     Unit* target = NULL;
                     std::list<Player*> players;
                     PlayersCheck check(owner);
-                    WoWSource::PlayerListSearcher<PlayersCheck> searcher(owner, players, check);
+                    TrinityCore::PlayerListSearcher<PlayersCheck> searcher(owner, players, check);
                     owner->VisitNearbyObject(200.0f, searcher);
                     if (!players.empty())
-                        target = WoWSource::Containers::SelectRandomContainerElement(players);
+                        target = TrinityCore::Containers::SelectRandomContainerElement(players);
                     else
                         target = owner;
 
@@ -1429,7 +1429,7 @@ class spell_spine_of_deathwing_blood_corruption_death : public SpellScriptLoader
                 if (targets.empty())
                     return;
 
-                WoWSource::Containers::RandomResizeList(targets, 1);
+                TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void Register()

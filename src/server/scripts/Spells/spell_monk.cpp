@@ -124,7 +124,7 @@ class spell_monk_fists_of_fury_stun : public SpellScriptLoader
 
             void RemoveInvalidTargets(std::list<WorldObject*>& targets)
             {
-                targets.remove_if(WoWSource::UnitAuraCheck(true, GetSpellInfo()->Id));
+                targets.remove_if(TrinityCore::UnitAuraCheck(true, GetSpellInfo()->Id));
             }
 
             void Register()
@@ -159,8 +159,8 @@ class spell_monk_expel_harm : public SpellScriptLoader
                     std::list<Unit*> targetList;
                     float radius = 10.0f;
 
-                    WoWSource::NearestAttackableUnitInObjectRangeCheck u_check(_player, _player, radius);
-                    WoWSource::UnitListSearcher<WoWSource::NearestAttackableUnitInObjectRangeCheck> searcher(_player, targetList, u_check);
+                    TrinityCore::NearestAttackableUnitInObjectRangeCheck u_check(_player, _player, radius);
+                    TrinityCore::UnitListSearcher<TrinityCore::NearestAttackableUnitInObjectRangeCheck> searcher(_player, targetList, u_check);
                     _player->VisitNearbyObject(radius, searcher);
 
                     for (auto itr : targetList)
@@ -257,15 +257,15 @@ class spell_monk_chi_wave_bolt : public SpellScriptLoader
                         else
                             return;
 
-                        CellCoord p(WoWSource::ComputeCellCoord(target->GetPositionX(), target->GetPositionY()));
+                        CellCoord p(TrinityCore::ComputeCellCoord(target->GetPositionX(), target->GetPositionY()));
                         Cell cell(p);
                         cell.SetNoCreate();
 
-                        WoWSource::AnyUnitInObjectRangeCheck u_check(_player, 20.0f);
-                        WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck> searcher(_player, targetList, u_check);
+                        TrinityCore::AnyUnitInObjectRangeCheck u_check(_player, 20.0f);
+                        TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck> searcher(_player, targetList, u_check);
 
-                        TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck>, WorldTypeMapContainer> world_unit_searcher(searcher);
-                        TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck>, GridTypeMapContainer>  grid_unit_searcher(searcher);
+                        TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck>, WorldTypeMapContainer> world_unit_searcher(searcher);
+                        TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck>, GridTypeMapContainer>  grid_unit_searcher(searcher);
 
                         cell.Visit(p, world_unit_searcher, *_player->GetMap(), *_player, 20.0f);
                         cell.Visit(p, grid_unit_searcher, *_player->GetMap(), *_player, 20.0f);
@@ -308,7 +308,7 @@ class spell_monk_chi_wave_bolt : public SpellScriptLoader
                                 if (alliesList.empty())
                                     return;
 
-                                alliesList.sort(WoWSource::HealthPctOrderPred());
+                                alliesList.sort(TrinityCore::HealthPctOrderPred());
 
                                 target->CastSpell(alliesList.front(), SPELL_MONK_CHI_WAVE_HEALING_BOLT, true, NULL, NULLAURA_EFFECT, _player->GetGUID());
                             }
@@ -848,7 +848,7 @@ class spell_monk_black_ox_statue : public SpellScriptLoader
                                         targets.push_back(itr);
                                     }
 
-                                    WoWSource::Containers::RandomResizeList(targets, 1);
+                                    TrinityCore::Containers::RandomResizeList(targets, 1);
 
                                     for (auto itr : targets)
                                         statue->CastSpell(itr, SPELL_MONK_GUARD, true);
@@ -1295,7 +1295,7 @@ class spell_monk_spinning_fire_blossom : public SpellScriptLoader
 
                     if (!targetList.empty())
                     {
-                        WoWSource::Containers::RandomResizeList(targetList, 1);
+                        TrinityCore::Containers::RandomResizeList(targetList, 1);
 
                         for (auto itr : targetList)
                             _player->CastSpell(itr, SPELL_MONK_SPINNING_FIRE_BLOSSOM_DAMAGE, true);
@@ -1358,7 +1358,7 @@ class spell_monk_thunder_focus_tea : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& unitList)
             {
-                unitList.remove_if(WoWSource::UnitAuraCheck(false, SPELL_MONK_RENEWING_MIST_HOT, GetCaster()->GetGUID()));
+                unitList.remove_if(TrinityCore::UnitAuraCheck(false, SPELL_MONK_RENEWING_MIST_HOT, GetCaster()->GetGUID()));
             }
 
             void HandleOnHit()
@@ -1700,7 +1700,7 @@ class spell_monk_renewing_mist : public SpellScriptLoader
 
                     if (playerList.size() > 1)
                     {
-                        playerList.sort(WoWSource::HealthPctOrderPred());
+                        playerList.sort(TrinityCore::HealthPctOrderPred());
                         playerList.resize(1);
                     }
 
@@ -2525,7 +2525,7 @@ class spell_monk_soothing_mist : public SpellScriptLoader
                         if (playerList.size() > 1)
                         {
                             playerList.remove(target);
-                            playerList.sort(WoWSource::HealthPctOrderPred());
+                            playerList.sort(TrinityCore::HealthPctOrderPred());
                             playerList.resize(1);
                         }
 

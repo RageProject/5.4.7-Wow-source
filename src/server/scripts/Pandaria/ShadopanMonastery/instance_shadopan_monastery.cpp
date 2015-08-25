@@ -322,13 +322,13 @@ public:
                 case NPC_SHA_VIOLENCE:          return shaViolenceGuid;
                 case NPC_TARAN_ZHU:             return taranZhuGuid;
                 case NPC_AZURE_SERPENT:         return azureSerpentGuid;
-                case NPC_ARCHERY_TARGET:        return WoWSource::Containers::SelectRandomContainerElement(archeryTargetGuids);
+                case NPC_ARCHERY_TARGET:        return TrinityCore::Containers::SelectRandomContainerElement(archeryTargetGuids);
                 case DATA_RANDOM_FIRST_POS:
                 {
                     if (firstDefeatedNovicePositionsGuid.empty())
                         return 0;
 
-                    uint64 guid = WoWSource::Containers::SelectRandomContainerElement(firstDefeatedNovicePositionsGuid);
+                    uint64 guid = TrinityCore::Containers::SelectRandomContainerElement(firstDefeatedNovicePositionsGuid);
                     firstDefeatedNovicePositionsGuid.remove(guid);
                     return guid;
                 }
@@ -337,7 +337,7 @@ public:
                     if (secondDefeatedNovicePositionsGuid.empty())
                         return 0;
 
-                    uint64 guid = WoWSource::Containers::SelectRandomContainerElement(secondDefeatedNovicePositionsGuid);
+                    uint64 guid = TrinityCore::Containers::SelectRandomContainerElement(secondDefeatedNovicePositionsGuid);
                     secondDefeatedNovicePositionsGuid.remove(guid);
                     return guid;
                 }
@@ -346,7 +346,7 @@ public:
                     if (minibossPositionsGuid.empty())
                         return 0;
 
-                    uint64 guid = WoWSource::Containers::SelectRandomContainerElement(minibossPositionsGuid);
+                    uint64 guid = TrinityCore::Containers::SelectRandomContainerElement(minibossPositionsGuid);
                     minibossPositionsGuid.remove(guid);
                     return guid;
                 }

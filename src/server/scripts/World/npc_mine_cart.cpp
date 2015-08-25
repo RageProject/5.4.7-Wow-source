@@ -306,8 +306,8 @@ public:
                 std::list<Unit*> targetList;
                 float radius = 20.0f;
 
-                WoWSource::AnyUnitInObjectRangeCheck u_check(me, radius);
-                WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck> searcher(me, targetList, u_check);
+                TrinityCore::AnyUnitInObjectRangeCheck u_check(me, radius);
+                TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck> searcher(me, targetList, u_check);
                 me->VisitNearbyObject(radius, searcher);
                 
                 uint8 alliance_count = 0;

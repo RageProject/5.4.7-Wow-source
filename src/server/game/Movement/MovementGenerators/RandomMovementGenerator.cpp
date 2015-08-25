@@ -53,8 +53,8 @@ void RandomMovementGenerator<Creature>::_setRandomLocation(Creature& creature)
     destY = respY + distanceY;
 
     // prevent invalid coordinates generation
-    WoWSource::NormalizeMapCoord(destX);
-    WoWSource::NormalizeMapCoord(destY);
+    TrinityCore::NormalizeMapCoord(destX);
+    TrinityCore::NormalizeMapCoord(destY);
 
     travelDistZ = distanceX*distanceX + distanceY*distanceY;
 

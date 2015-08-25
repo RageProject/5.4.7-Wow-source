@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <unordered_map>
 
-namespace WoWSource
+namespace TrinityCore
 {
     class SpellChargesTracker final
     {
@@ -31,6 +31,6 @@ namespace WoWSource
         auto const i = spellChargesMap_.find(spellId);
         return (i != spellChargesMap_.end()) ? i->second.consumedCharges : 0;
     }
-} // namespace WoWSource
+} // namespace TrinityCore
 
 #endif // JadeCore_GAME_SPELL_CHARGES_TRACKER_H

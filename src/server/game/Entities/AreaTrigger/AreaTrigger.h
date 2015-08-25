@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2015 WoWSource <http://wowsource.info/>
+ * Copyright (C) 2012-2015 TrinityCore <http://TrinityCore.info/>
  * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it

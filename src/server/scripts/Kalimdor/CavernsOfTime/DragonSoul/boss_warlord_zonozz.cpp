@@ -744,7 +744,7 @@ class spell_warlord_zonozz_disrupting_shadows : public SpellScriptLoader
                         targets.remove(pTank);
 
                 uint32 max_targets = (GetCaster()->GetMap()->Is25ManRaid() ? 5 : 2);
-                WoWSource::Containers::RandomResizeList(targets, max_targets);
+                TrinityCore::Containers::RandomResizeList(targets, max_targets);
             }
 
             void Register()

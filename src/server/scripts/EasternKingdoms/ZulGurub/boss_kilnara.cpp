@@ -481,7 +481,7 @@ class spell_kilnara_rat_lure : public SpellScriptLoader
             { 
                 targets.remove_if(PrideCheck());
                 if (targets.size() > 1)
-                    WoWSource::RandomResizeList(targets, 1);
+                    TrinityCore::RandomResizeList(targets, 1);
             }
 
             void HandleScript(SpellEffIndex effIndex)

@@ -3112,8 +3112,8 @@ void AuraEffect::HandleFeignDeath(AuraApplication const* aurApp, uint8 mode, boo
         */
 
         UnitList targets;
-        WoWSource::AnyUnfriendlyUnitInObjectRangeCheck u_check(target, target, target->GetMap()->GetVisibilityRange());
-        WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyUnitInObjectRangeCheck> searcher(target, targets, u_check);
+        TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck u_check(target, target, target->GetMap()->GetVisibilityRange());
+        TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck> searcher(target, targets, u_check);
         target->VisitNearbyObject(target->GetMap()->GetVisibilityRange(), searcher);
         for (UnitList::iterator iter = targets.begin(); iter != targets.end(); ++iter)
         {
@@ -6902,14 +6902,14 @@ void AuraEffect::HandlePeriodicDummyAuraTick(Unit* target, Unit* caster) const
                             // eff_radius == 0
                             float radius = GetSpellInfo()->GetMaxRange(false);
 
-                            CellCoord p(WoWSource::ComputeCellCoord(target->GetPositionX(), target->GetPositionY()));
+                            CellCoord p(TrinityCore::ComputeCellCoord(target->GetPositionX(), target->GetPositionY()));
                             Cell cell(p);
 
-                            WoWSource::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck u_check(target, radius);
-                            WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck> checker(target, targets, u_check);
+                            TrinityCore::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck u_check(target, radius);
+                            TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck> checker(target, targets, u_check);
 
-                            TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck>, GridTypeMapContainer > grid_object_checker(checker);
-                            TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck>, WorldTypeMapContainer > world_object_checker(checker);
+                            TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck>, GridTypeMapContainer > grid_object_checker(checker);
+                            TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyAttackableVisibleUnitInObjectRangeCheck>, WorldTypeMapContainer > world_object_checker(checker);
 
                             cell.Visit(p, grid_object_checker, *GetBase()->GetOwner()->GetMap(), *target, radius);
                             cell.Visit(p, world_object_checker, *GetBase()->GetOwner()->GetMap(), *target, radius);
@@ -6928,7 +6928,7 @@ void AuraEffect::HandlePeriodicDummyAuraTick(Unit* target, Unit* caster) const
                         if (validTargets.empty())
                             return;
 
-                        Unit* spellTarget = sObjectAccessor->FindUnit(WoWSource::Containers::SelectRandomContainerElement(validTargets));
+                        Unit* spellTarget = sObjectAccessor->FindUnit(TrinityCore::Containers::SelectRandomContainerElement(validTargets));
 
                         target->CastSpell(spellTarget, 57840, true);
                         target->CastSpell(spellTarget, 57841, true);

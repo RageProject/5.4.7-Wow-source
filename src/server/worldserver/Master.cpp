@@ -54,7 +54,7 @@ extern int m_ServiceStatus;
 #endif
 
 /// Handle worldservers's termination signals
-class WorldServerSignalHandler : public WoWSource::SignalHandler
+class WorldServerSignalHandler : public TrinityCore::SignalHandler
 {
     public:
         virtual void HandleSignal(int SigNum)
@@ -138,9 +138,9 @@ int Master::Run()
 	sLog->outInfo(LOG_FILTER_WORLDSERVER, "| |/\\| |/ _ \\| |/\\| |`--. \\/ _ \\| | | | '__/ __/ _ \\");
 	sLog->outInfo(LOG_FILTER_WORLDSERVER, "\\  /\\  / (_) \\  /\\  /\\__/ / (_) | |_| | | | (_|  __/");
 	sLog->outInfo(LOG_FILTER_WORLDSERVER, " \\/  \\/ \\___/ \\/  \\/\\____/ \\___/ \\__,_|_|  \\___\\___|");
-	sLog->outInfo(LOG_FILTER_WORLDSERVER, "WoWSource 2012-2015");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Visit our forum www.wowsource.info");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "WoWSource V3 Mop 5.4.8");
+	sLog->outInfo(LOG_FILTER_WORLDSERVER, "TrinityCore 2012-2015");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Visit our forum www.TrinityCore.info");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "TrinityCore V3 Mop 5.4.8");
 
     /// worldserver PID file creation
     std::string pidfile = ConfigMgr::GetStringDefault("PidFile", "");

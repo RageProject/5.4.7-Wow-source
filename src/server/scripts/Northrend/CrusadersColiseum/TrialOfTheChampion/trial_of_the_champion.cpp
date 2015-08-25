@@ -274,7 +274,7 @@ public:
                     {
                         if (!announceID.empty())
                         {
-                            int32 announce = WoWSource::Containers::SelectRandomContainerElement(announceID);
+                            int32 announce = TrinityCore::Containers::SelectRandomContainerElement(announceID);
                             DoScriptText(announce, me, player);
                             announceID.erase(announce);
                         }

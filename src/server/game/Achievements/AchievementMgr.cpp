@@ -42,7 +42,7 @@
 #include "Group.h"
 #include "Chat.h"
 
-namespace WoWSource
+namespace TrinityCore
 {
     class AchievementChatBuilder
     {
@@ -62,7 +62,7 @@ namespace WoWSource
             int32 i_textId;
             uint32 i_achievementId;
     };
-}                                                           // namespace WoWSource
+}                                                           // namespace TrinityCore
 
 bool AchievementCriteriaData::IsValid(AchievementCriteriaEntry const* criteria)
 {
@@ -1156,8 +1156,8 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
 
     if (Guild* guild = sGuildMgr->GetGuildById(GetOwner()->GetGuildId()))
     {
-        WoWSource::AchievementChatBuilder say_builder(*GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, LANG_ACHIEVEMENT_EARNED, achievement->ID);
-        WoWSource::LocalizedPacketDo<WoWSource::AchievementChatBuilder> say_do(say_builder);
+        TrinityCore::AchievementChatBuilder say_builder(*GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, LANG_ACHIEVEMENT_EARNED, achievement->ID);
+        TrinityCore::LocalizedPacketDo<TrinityCore::AchievementChatBuilder> say_do(say_builder);
         guild->BroadcastWorker(say_do);
     }
 
@@ -1174,15 +1174,15 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
     // If player is in world he can tell his friends about new achievement
     else if (GetOwner()->IsInWorld())
     {
-        CellCoord p = WoWSource::ComputeCellCoord(GetOwner()->GetPositionX(), GetOwner()->GetPositionY());
+        CellCoord p = TrinityCore::ComputeCellCoord(GetOwner()->GetPositionX(), GetOwner()->GetPositionY());
 
         Cell cell(p);
         cell.SetNoCreate();
 
-        WoWSource::AchievementChatBuilder say_builder(*GetOwner(), CHAT_MSG_ACHIEVEMENT, LANG_ACHIEVEMENT_EARNED, achievement->ID);
-        WoWSource::LocalizedPacketDo<WoWSource::AchievementChatBuilder> say_do(say_builder);
-        WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::AchievementChatBuilder> > say_worker(GetOwner(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
-        TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::AchievementChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+        TrinityCore::AchievementChatBuilder say_builder(*GetOwner(), CHAT_MSG_ACHIEVEMENT, LANG_ACHIEVEMENT_EARNED, achievement->ID);
+        TrinityCore::LocalizedPacketDo<TrinityCore::AchievementChatBuilder> say_do(say_builder);
+        TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::AchievementChatBuilder> > say_worker(GetOwner(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
+        TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::AchievementChatBuilder> >, WorldTypeMapContainer > message(say_worker);
         cell.Visit(p, message, *GetOwner()->GetMap(), *GetOwner(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY));
     }
 

@@ -196,7 +196,7 @@ public:
             }
         }
 
-        CellCoord cellCoord = WoWSource::ComputeCellCoord(object->GetPositionX(), object->GetPositionY());
+        CellCoord cellCoord = TrinityCore::ComputeCellCoord(object->GetPositionX(), object->GetPositionY());
         Cell cell(cellCoord);
 
         uint32 zoneId, areaId;
@@ -215,7 +215,7 @@ public:
         float groundZ = map->GetHeight(object->GetPhaseMask(), object->GetPositionX(), object->GetPositionY(), MAX_HEIGHT);
         float floorZ = map->GetHeight(object->GetPhaseMask(), object->GetPositionX(), object->GetPositionY(), object->GetPositionZ());
 
-        GridCoord gridCoord = WoWSource::ComputeGridCoord(object->GetPositionX(), object->GetPositionY());
+        GridCoord gridCoord = TrinityCore::ComputeGridCoord(object->GetPositionX(), object->GetPositionY());
 
         // 63? WHY?
         int gridX = 63 - gridCoord.x_coord;
@@ -1807,14 +1807,14 @@ public:
             return true;
         }
 
-        CellCoord p(WoWSource::ComputeCellCoord(player->GetPositionX(), player->GetPositionY()));
+        CellCoord p(TrinityCore::ComputeCellCoord(player->GetPositionX(), player->GetPositionY()));
         Cell cell(p);
         cell.SetNoCreate();
 
-        WoWSource::RespawnDo u_do;
-        WoWSource::WorldObjectWorker<WoWSource::RespawnDo> worker(player, u_do);
+        TrinityCore::RespawnDo u_do;
+        TrinityCore::WorldObjectWorker<TrinityCore::RespawnDo> worker(player, u_do);
 
-        TypeContainerVisitor<WoWSource::WorldObjectWorker<WoWSource::RespawnDo>, GridTypeMapContainer > obj_worker(worker);
+        TypeContainerVisitor<TrinityCore::WorldObjectWorker<TrinityCore::RespawnDo>, GridTypeMapContainer > obj_worker(worker);
         cell.Visit(p, obj_worker, *player->GetMap(), *player, player->GetGridActivationRange());
 
         return true;

@@ -517,8 +517,8 @@ class spell_venoxis_toxic_link_aura : public SpellScriptLoader
                     return;
 
                  UnitList targets;
-                 WoWSource::AnyUnitHavingBuffInObjectRangeCheck u_check(GetCaster(), GetTarget(), 100, SPELL_TOXIC_LINK_AURA, true);
-                 WoWSource::UnitListSearcher<WoWSource::AnyUnitHavingBuffInObjectRangeCheck> searcher(GetTarget(), targets, u_check);
+                 TrinityCore::AnyUnitHavingBuffInObjectRangeCheck u_check(GetCaster(), GetTarget(), 100, SPELL_TOXIC_LINK_AURA, true);
+                 TrinityCore::UnitListSearcher<TrinityCore::AnyUnitHavingBuffInObjectRangeCheck> searcher(GetTarget(), targets, u_check);
                  GetTarget()->VisitNearbyObject(80, searcher);
 
                  if (targets.size() < 2)

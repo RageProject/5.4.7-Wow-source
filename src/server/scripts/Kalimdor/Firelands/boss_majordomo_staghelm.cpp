@@ -253,8 +253,8 @@ class boss_majordomo_staghelm : public CreatureScript
                             if (Unit* target = me->getVictim())
                             {
                                 std::list<Player*> PlayerList;
-                                WoWSource::AnyPlayerInObjectRangeCheck checker(target, 10.0f);
-                                WoWSource::PlayerListSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(target, PlayerList, checker);
+                                TrinityCore::AnyPlayerInObjectRangeCheck checker(target, 10.0f);
+                                TrinityCore::PlayerListSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(target, PlayerList, checker);
                                 target->VisitNearbyWorldObject(5.0f, searcher);
                                 uint8 const minTargets = Is25ManRaid() ? 18 : 7;
                                 if (PlayerList.size() >= minTargets)

@@ -237,7 +237,7 @@ void CreatureTextMgr::SendChatPacket(WorldObject* source, Builder const& builder
     }
 
     float dist = GetRangeForChatType(msgType);
-    WoWSource::PlayerDistWorker<CreatureTextLocalizer<Builder> > worker(source, dist, localizer);
+    TrinityCore::PlayerDistWorker<CreatureTextLocalizer<Builder> > worker(source, dist, localizer);
     source->VisitNearbyWorldObject(dist, worker);
 }
 

@@ -21,7 +21,7 @@
 
 #include <ace/Event_Handler.h>
 
-namespace WoWSource
+namespace TrinityCore
 {
 
 /// Handle termination signals

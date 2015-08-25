@@ -792,8 +792,8 @@ class npc_simon_bunny : public CreatureScript
                 me->SetObjectScale(large ? 2.0f : 1.0f);
 
                 std::list<WorldObject*> ClusterList;
-                WoWSource::AllWorldObjectsInRange objects(me, searchDistance);
-                WoWSource::WorldObjectListSearcher<WoWSource::AllWorldObjectsInRange> searcher(me, ClusterList, objects);
+                TrinityCore::AllWorldObjectsInRange objects(me, searchDistance);
+                TrinityCore::WorldObjectListSearcher<TrinityCore::AllWorldObjectsInRange> searcher(me, ClusterList, objects);
                 me->VisitNearbyObject(searchDistance, searcher);
 
                 for (std::list<WorldObject*>::const_iterator i = ClusterList.begin(); i != ClusterList.end(); ++i)

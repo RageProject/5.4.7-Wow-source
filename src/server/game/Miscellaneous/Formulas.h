@@ -23,7 +23,7 @@
 #include "SharedDefines.h"
 #include "ScriptMgr.h"
 
-namespace WoWSource
+namespace TrinityCore
 {
     namespace Honor
     {

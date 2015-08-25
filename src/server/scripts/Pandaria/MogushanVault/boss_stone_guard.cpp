@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-20XX WoWSource <http://wowsource.info>
+ * Copyright (C) 2008-20XX TrinityCore <http://TrinityCore.info>
  * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
@@ -708,7 +708,7 @@ class boss_generic_guardian : public CreatureScript
                                         if (tempPlayerList.size() < 2)
                                             break;
 
-                                        WoWSource::Containers::RandomResizeList(tempPlayerList, 2);
+                                        TrinityCore::Containers::RandomResizeList(tempPlayerList, 2);
                                     
                                         Player* firstPlayer  = *tempPlayerList.begin();
                                         Player* SecondPlayer = *(++(tempPlayerList.begin()));

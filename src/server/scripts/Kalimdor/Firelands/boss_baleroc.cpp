@@ -354,13 +354,13 @@ class spell_baleroc_shards_of_torment_aoe : public SpellScriptLoader
                                 meleetargets.remove_if(AuraCheck(SPELL_BLAZE_OF_GLORY));
                             
                             if (meleetargets.size() > 1)
-                                WoWSource::Containers::RandomResizeList(meleetargets, 1);
+                                TrinityCore::Containers::RandomResizeList(meleetargets, 1);
 
                             targets.clear();
                             targets.push_back(meleetargets.front());
                         }
                         else
-                            WoWSource::Containers::RandomResizeList(targets, 1);
+                            TrinityCore::Containers::RandomResizeList(targets, 1);
 
                         break;
                     }
@@ -387,7 +387,7 @@ class spell_baleroc_shards_of_torment_aoe : public SpellScriptLoader
                                 targets.remove_if(AuraCheck(SPELL_BLAZE_OF_GLORY));
                             
                             if (targets.size() > 2)
-                                WoWSource::Containers::RandomResizeList(targets, 2);
+                                TrinityCore::Containers::RandomResizeList(targets, 2);
                         }
                         else if (!meleetargets.empty() && !rangetargets.empty())
                         {
@@ -395,13 +395,13 @@ class spell_baleroc_shards_of_torment_aoe : public SpellScriptLoader
                                 meleetargets.remove_if(AuraCheck(SPELL_BLAZE_OF_GLORY));
                             
                             if (meleetargets.size() > 1)
-                                WoWSource::Containers::RandomResizeList(meleetargets, 1);
+                                TrinityCore::Containers::RandomResizeList(meleetargets, 1);
 
                             if (GetMembersWithoutAura(rangetargets, SPELL_BLAZE_OF_GLORY) >= 1)
                                 rangetargets.remove_if(AuraCheck(SPELL_BLAZE_OF_GLORY));
                             
                             if (rangetargets.size() > 1)
-                                WoWSource::Containers::RandomResizeList(rangetargets, 1);
+                                TrinityCore::Containers::RandomResizeList(rangetargets, 1);
 
                             targets.clear();;
                             targets.push_back(meleetargets.front());

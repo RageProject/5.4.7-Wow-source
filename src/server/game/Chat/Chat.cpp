@@ -983,8 +983,8 @@ GameObject* ChatHandler::GetNearbyGameObject()
 
     Player* pl = m_session->GetPlayer();
     GameObject* obj = NULL;
-    WoWSource::NearestGameObjectCheck check(*pl);
-    WoWSource::GameObjectLastSearcher<WoWSource::NearestGameObjectCheck> searcher(pl, obj, check);
+    TrinityCore::NearestGameObjectCheck check(*pl);
+    TrinityCore::GameObjectLastSearcher<TrinityCore::NearestGameObjectCheck> searcher(pl, obj, check);
     pl->VisitNearbyGridObject(SIZE_OF_GRIDS, searcher);
     return obj;
 }
@@ -1001,13 +1001,13 @@ GameObject* ChatHandler::GetObjectGlobalyWithGuidOrNearWithDbGuid(uint32 lowguid
     if (!obj && sObjectMgr->GetGOData(lowguid))                   // guid is DB guid of object
     {
         // search near player then
-        CellCoord p(WoWSource::ComputeCellCoord(pl->GetPositionX(), pl->GetPositionY()));
+        CellCoord p(TrinityCore::ComputeCellCoord(pl->GetPositionX(), pl->GetPositionY()));
         Cell cell(p);
 
-        WoWSource::GameObjectWithDbGUIDCheck go_check(*pl, lowguid);
-        WoWSource::GameObjectSearcher<WoWSource::GameObjectWithDbGUIDCheck> checker(pl, obj, go_check);
+        TrinityCore::GameObjectWithDbGUIDCheck go_check(*pl, lowguid);
+        TrinityCore::GameObjectSearcher<TrinityCore::GameObjectWithDbGUIDCheck> checker(pl, obj, go_check);
 
-        TypeContainerVisitor<WoWSource::GameObjectSearcher<WoWSource::GameObjectWithDbGUIDCheck>, GridTypeMapContainer > object_checker(checker);
+        TypeContainerVisitor<TrinityCore::GameObjectSearcher<TrinityCore::GameObjectWithDbGUIDCheck>, GridTypeMapContainer > object_checker(checker);
         cell.Visit(p, object_checker, *pl->GetMap(), *pl, pl->GetGridActivationRange());
     }
 
