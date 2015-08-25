@@ -557,7 +557,7 @@ void Log::outArena(const char * str, ...)
 	log->str = query;
 }
 
-void Log::OutPandashan(const char* str, ...)
+void Log::OutTrinityCore(const char* str, ...)
 {
 	if (!str)
 		return;

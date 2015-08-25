@@ -65,7 +65,7 @@ class Log
                         const char * str);
         void outCharDump(char const* str, uint32 account_id, uint32 guid, char const* name);
 
-        void OutPandashan(const char* str, ...);
+        void OutTrinityCore(const char* str, ...);
 
         void EnableDBAppenders();
         static std::string GetTimestampStr();
