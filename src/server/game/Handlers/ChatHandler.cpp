@@ -424,6 +424,41 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
             break;
         }
+		/*case CHAT_MSG_OFFICER:
+        {
+            char message[1024];
+			switch(GetPlayer()->GetSession()->GetSecurity())
+			{
+			case SEC_PLAYER: // normal pPlayer, non-vip	1				
+					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
+					break;
+					
+			case SEC_VIP: // VIP2
+			case SEC_VIP_2:
+					snprintf(message, 1024, "|cff33CC00World |cffFFD800[ V.I.P ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					break;
+					
+			case SEC_MODERATOR: // TRIAL GM4
+			case SEC_GAMEMASTER:
+			case SEC_HEADGM:
+			case SEC_ADMINISTRATOR:
+			case SEC_HEAD_ADMIN:
+			case SEC_CO:
+			case SEC_OWNER:
+					if (GetPlayer()->isGameMaster()==TRUE)
+					{
+					snprintf(message, 1024, "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00FFFF[Satria-GM]|cff00CCEE[%s]:|cffFF6A00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}
+					{
+					if (GetPlayer()->isGameMaster()==FALSE)
+					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}
+					break;
+										
+			}
+			sWorld->SendGlobalText(message, NULL);
+        } break;*/
+
         case CHAT_MSG_RAID:
         case CHAT_MSG_RAID_LEADER:
         {
@@ -728,7 +763,7 @@ void WorldSession::HandleEmoteOpcode(WorldPacket & recvData)
     GetPlayer()->HandleEmoteCommand(emote);
 }
 
-namespace WoWSource
+namespace TrinityCore
 {
     class EmoteChatBuilder
     {
@@ -786,7 +821,7 @@ namespace WoWSource
             uint32        i_emote_num;
             Unit const*   i_target;
     };
-}                                                           // namespace WoWSource
+}                                                           // namespace TrinityCore
 
 void WorldSession::HandleTextEmoteOpcode(WorldPacket & recvData)
 {
@@ -841,15 +876,15 @@ void WorldSession::HandleTextEmoteOpcode(WorldPacket & recvData)
 
     Unit* unit = ObjectAccessor::GetUnit(*_player, guid);
 
-    CellCoord p = WoWSource::ComputeCellCoord(GetPlayer()->GetPositionX(), GetPlayer()->GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPlayer()->GetPositionX(), GetPlayer()->GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::EmoteChatBuilder emote_builder(*GetPlayer(), emote_anim, text_emote, unit);
-    WoWSource::LocalizedPacketDo<WoWSource::EmoteChatBuilder > emote_do(emote_builder);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::EmoteChatBuilder > > emote_worker(GetPlayer(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE), emote_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::EmoteChatBuilder> >, WorldTypeMapContainer> message(emote_worker);
+    TrinityCore::EmoteChatBuilder emote_builder(*GetPlayer(), emote_anim, text_emote, unit);
+    TrinityCore::LocalizedPacketDo<TrinityCore::EmoteChatBuilder > emote_do(emote_builder);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::EmoteChatBuilder > > emote_worker(GetPlayer(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE), emote_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::EmoteChatBuilder> >, WorldTypeMapContainer> message(emote_worker);
     cell.Visit(p, message, *GetPlayer()->GetMap(), *GetPlayer(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE));
 
     GetPlayer()->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_DO_EMOTE, text_emote, 0, 0, unit);

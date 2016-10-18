@@ -1068,7 +1068,7 @@ class npc_dragon_soul_thrall_1 : public CreatureScript
             {
                 Player* player = NULL;
                 AnyLivePlayerNoGmCheck check(me, 500.0f);
-                WoWSource::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
+                TrinityCore::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
                 me->VisitNearbyWorldObject(500.0f, searcher);
                 return (player ? true : false);
             }
@@ -2646,7 +2646,7 @@ class npc_madness_of_deathwing_jump_pad : public CreatureScript
                 {
                     std::list<Player*> players;
                     PlayerCheck check(me, spellIdEx1, spellIdEx2);
-                    WoWSource::PlayerListSearcher<PlayerCheck> searcher(me, players, check);
+                    TrinityCore::PlayerListSearcher<PlayerCheck> searcher(me, players, check);
                     me->VisitNearbyObject(32.0f, searcher);
                     if (!players.empty())
                         for (std::list<Player*>::const_iterator itr = players.begin(); itr != players.end(); ++ itr)
@@ -2785,7 +2785,7 @@ class spell_madness_of_deathwing_crush_force : public SpellScriptLoader
                 if (targets.empty())
                     return;
 
-                WoWSource::Containers::RandomResizeList(targets, 1);
+                TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void Register()
@@ -3059,7 +3059,7 @@ class spell_madness_of_deathwing_shrapnel_aoe : public SpellScriptLoader
 
                 targets.remove_if(PlayersCheck());
 
-                WoWSource::Containers::RandomResizeList(targets, fragments.size());
+                TrinityCore::Containers::RandomResizeList(targets, fragments.size());
 
                 for (std::list<uint64>::const_iterator itr = fragments.begin(); itr != fragments.end(); ++itr)
                 {

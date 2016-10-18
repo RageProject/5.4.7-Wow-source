@@ -955,16 +955,16 @@ void hyjalAI::JustDied(Unit* /*killer*/)
 
 void hyjalAI::HideNearPos(float x, float y)
 {
-    CellCoord pair(WoWSource::ComputeCellCoord(x, y));
+    CellCoord pair(TrinityCore::ComputeCellCoord(x, y));
     Cell cell(pair);
     cell.SetNoCreate();
 
     // First get all creatures.
     std::list<Creature*> creatures;
-    WoWSource::AllFriendlyCreaturesInGrid creature_check(me);
-    WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
+    TrinityCore::AllFriendlyCreaturesInGrid creature_check(me);
+    TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
 
-    TypeContainerVisitor <WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> creature_visitor(creature_searcher);
+    TypeContainerVisitor <TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> creature_visitor(creature_searcher);
     cell.Visit(pair, creature_visitor, *(me->GetMap()), *me, me->GetGridActivationRange());
 
     if (!creatures.empty())
@@ -979,13 +979,13 @@ void hyjalAI::HideNearPos(float x, float y)
 
 void hyjalAI::RespawnNearPos(float x, float y)
 {
-    CellCoord p(WoWSource::ComputeCellCoord(x, y));
+    CellCoord p(TrinityCore::ComputeCellCoord(x, y));
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::RespawnDo u_do;
-    WoWSource::WorldObjectWorker<WoWSource::RespawnDo> worker(me, u_do);
-    TypeContainerVisitor<WoWSource::WorldObjectWorker<WoWSource::RespawnDo>, GridTypeMapContainer > obj_worker(worker);
+    TrinityCore::RespawnDo u_do;
+    TrinityCore::WorldObjectWorker<TrinityCore::RespawnDo> worker(me, u_do);
+    TypeContainerVisitor<TrinityCore::WorldObjectWorker<TrinityCore::RespawnDo>, GridTypeMapContainer > obj_worker(worker);
     cell.Visit(p, obj_worker, *me->GetMap(), *me, me->GetGridActivationRange());
 }
 
@@ -1010,16 +1010,16 @@ void hyjalAI::WaypointReached(uint32 waypointId)
         }
         //do some talking
         //all alive guards walk near here
-        CellCoord pair(WoWSource::ComputeCellCoord(me->GetPositionX(), me->GetPositionY()));
+        CellCoord pair(TrinityCore::ComputeCellCoord(me->GetPositionX(), me->GetPositionY()));
         Cell cell(pair);
         cell.SetNoCreate();
 
         // First get all creatures.
         std::list<Creature*> creatures;
-        WoWSource::AllFriendlyCreaturesInGrid creature_check(me);
-        WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
+        TrinityCore::AllFriendlyCreaturesInGrid creature_check(me);
+        TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
         TypeContainerVisitor
-            <WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid>,
+            <TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid>,
             GridTypeMapContainer> creature_visitor(creature_searcher);
 
         cell.Visit(pair, creature_visitor, *(me->GetMap()), *me, me->GetGridActivationRange());
@@ -1051,15 +1051,15 @@ void hyjalAI::DoOverrun(uint32 faction, const uint32 diff)
     {
         if (TeleportTimer <= diff)
         {
-            CellCoord pair(WoWSource::ComputeCellCoord(me->GetPositionX(), me->GetPositionY()));
+            CellCoord pair(TrinityCore::ComputeCellCoord(me->GetPositionX(), me->GetPositionY()));
             Cell cell(pair);
             cell.SetNoCreate();
 
             std::list<Creature*> creatures;
-            WoWSource::AllFriendlyCreaturesInGrid creature_check(me);
-            WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
+            TrinityCore::AllFriendlyCreaturesInGrid creature_check(me);
+            TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid> creature_searcher(me, creatures, creature_check);
             TypeContainerVisitor
-                <WoWSource::CreatureListSearcher<WoWSource::AllFriendlyCreaturesInGrid>,
+                <TrinityCore::CreatureListSearcher<TrinityCore::AllFriendlyCreaturesInGrid>,
                 GridTypeMapContainer> creature_visitor(creature_searcher);
 
             cell.Visit(pair, creature_visitor, *(me->GetMap()), *me, me->GetGridActivationRange());

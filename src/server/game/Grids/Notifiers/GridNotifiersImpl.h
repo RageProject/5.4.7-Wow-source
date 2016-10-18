@@ -28,7 +28,7 @@
 #include "SpellAuras.h"
 
 template<class T>
-inline void WoWSource::VisibleNotifier::Visit(GridRefManager<T> &m)
+inline void TrinityCore::VisibleNotifier::Visit(GridRefManager<T> &m)
 {
     for (typename GridRefManager<T>::iterator iter = m.begin(); iter != m.end(); ++iter)
     {
@@ -37,7 +37,7 @@ inline void WoWSource::VisibleNotifier::Visit(GridRefManager<T> &m)
     }
 }
 
-inline void WoWSource::ObjectUpdater::Visit(CreatureMapType &m)
+inline void TrinityCore::ObjectUpdater::Visit(CreatureMapType &m)
 {
     for (CreatureMapType::iterator iter = m.begin(); iter != m.end(); ++iter)
         if (iter->getSource()->IsInWorld())
@@ -49,7 +49,7 @@ inline void WoWSource::ObjectUpdater::Visit(CreatureMapType &m)
 // WorldObject searchers & workers
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(GameObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_GAMEOBJECT))
         return;
@@ -72,7 +72,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(GameObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(PlayerMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_PLAYER))
         return;
@@ -95,7 +95,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(CreatureMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CREATURE))
         return;
@@ -118,7 +118,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(CorpseMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(CorpseMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CORPSE))
         return;
@@ -141,7 +141,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(CorpseMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(DynamicObjectMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(DynamicObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_DYNAMICOBJECT))
         return;
@@ -164,7 +164,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(DynamicObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectSearcher<Check>::Visit(AreaTriggerMapType &m)
+void TrinityCore::WorldObjectSearcher<Check>::Visit(AreaTriggerMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_AREATRIGGER))
         return;
@@ -187,7 +187,7 @@ void WoWSource::WorldObjectSearcher<Check>::Visit(AreaTriggerMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_GAMEOBJECT))
         return;
@@ -203,7 +203,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(PlayerMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_PLAYER))
         return;
@@ -219,7 +219,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(CreatureMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CREATURE))
         return;
@@ -235,7 +235,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(CorpseMapType &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(CorpseMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CORPSE))
         return;
@@ -251,7 +251,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(CorpseMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(DynamicObjectMapType &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(DynamicObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_DYNAMICOBJECT))
         return;
@@ -267,7 +267,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(DynamicObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectLastSearcher<Check>::Visit(AreaTriggerMapType  &m)
+void TrinityCore::WorldObjectLastSearcher<Check>::Visit(AreaTriggerMapType  &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_AREATRIGGER))
         return;
@@ -283,7 +283,7 @@ void WoWSource::WorldObjectLastSearcher<Check>::Visit(AreaTriggerMapType  &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(PlayerMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_PLAYER))
         return;
@@ -294,7 +294,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(CreatureMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CREATURE))
         return;
@@ -305,7 +305,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(CorpseMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(CorpseMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_CORPSE))
         return;
@@ -316,7 +316,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(CorpseMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(GameObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_GAMEOBJECT))
         return;
@@ -327,7 +327,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(GameObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(DynamicObjectMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(DynamicObjectMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_DYNAMICOBJECT))
         return;
@@ -338,7 +338,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(DynamicObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::WorldObjectListSearcher<Check>::Visit(AreaTriggerMapType &m)
+void TrinityCore::WorldObjectListSearcher<Check>::Visit(AreaTriggerMapType &m)
 {
     if (!(i_mapTypeMask & GRID_MAP_TYPE_MASK_AREATRIGGER))
         return;
@@ -351,7 +351,7 @@ void WoWSource::WorldObjectListSearcher<Check>::Visit(AreaTriggerMapType &m)
 // Gameobject searchers
 
 template<class Check>
-void WoWSource::GameObjectSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::GameObjectSearcher<Check>::Visit(GameObjectMapType &m)
 {
     // already found
     if (i_object)
@@ -371,7 +371,7 @@ void WoWSource::GameObjectSearcher<Check>::Visit(GameObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::GameObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::GameObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
 {
     for (GameObjectMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
     {
@@ -384,7 +384,7 @@ void WoWSource::GameObjectLastSearcher<Check>::Visit(GameObjectMapType &m)
 }
 
 template<class Check>
-void WoWSource::GameObjectListSearcher<Check>::Visit(GameObjectMapType &m)
+void TrinityCore::GameObjectListSearcher<Check>::Visit(GameObjectMapType &m)
 {
     for (GameObjectMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
         if (itr->getSource()->InSamePhase(i_phaseMask))
@@ -395,7 +395,7 @@ void WoWSource::GameObjectListSearcher<Check>::Visit(GameObjectMapType &m)
 // Unit searchers
 
 template<class Check>
-void WoWSource::UnitSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::UnitSearcher<Check>::Visit(CreatureMapType &m)
 {
     // already found
     if (i_object)
@@ -415,7 +415,7 @@ void WoWSource::UnitSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::UnitSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::UnitSearcher<Check>::Visit(PlayerMapType &m)
 {
     // already found
     if (i_object)
@@ -435,7 +435,7 @@ void WoWSource::UnitSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::UnitLastSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::UnitLastSearcher<Check>::Visit(CreatureMapType &m)
 {
     for (CreatureMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
     {
@@ -448,7 +448,7 @@ void WoWSource::UnitLastSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::UnitLastSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::UnitLastSearcher<Check>::Visit(PlayerMapType &m)
 {
     for (PlayerMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
     {
@@ -461,7 +461,7 @@ void WoWSource::UnitLastSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::UnitListSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::UnitListSearcher<Check>::Visit(PlayerMapType &m)
 {
     for (PlayerMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
         if (itr->getSource()->InSamePhase(i_phaseMask))
@@ -470,7 +470,7 @@ void WoWSource::UnitListSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::UnitListSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::UnitListSearcher<Check>::Visit(CreatureMapType &m)
 {
     for (CreatureMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
         if (itr->getSource()->InSamePhase(i_phaseMask))
@@ -481,7 +481,7 @@ void WoWSource::UnitListSearcher<Check>::Visit(CreatureMapType &m)
 // Creature searchers
 
 template<class Check>
-void WoWSource::CreatureSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::CreatureSearcher<Check>::Visit(CreatureMapType &m)
 {
     // already found
     if (i_object)
@@ -501,7 +501,7 @@ void WoWSource::CreatureSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::CreatureLastSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::CreatureLastSearcher<Check>::Visit(CreatureMapType &m)
 {
     for (CreatureMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
     {
@@ -514,7 +514,7 @@ void WoWSource::CreatureLastSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::CreatureListSearcher<Check>::Visit(CreatureMapType &m)
+void TrinityCore::CreatureListSearcher<Check>::Visit(CreatureMapType &m)
 {
     for (CreatureMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
         if (itr->getSource()->InSamePhase(i_phaseMask))
@@ -523,7 +523,7 @@ void WoWSource::CreatureListSearcher<Check>::Visit(CreatureMapType &m)
 }
 
 template<class Check>
-void WoWSource::PlayerListSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::PlayerListSearcher<Check>::Visit(PlayerMapType &m)
 {
     for (PlayerMapType::iterator itr=m.begin(); itr != m.end(); ++itr)
     {
@@ -537,7 +537,7 @@ void WoWSource::PlayerListSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::PlayerSearcher<Check>::Visit(PlayerMapType &m)
+void TrinityCore::PlayerSearcher<Check>::Visit(PlayerMapType &m)
 {
     // already found
     if (i_object)
@@ -557,7 +557,7 @@ void WoWSource::PlayerSearcher<Check>::Visit(PlayerMapType &m)
 }
 
 template<class Check>
-void WoWSource::PlayerLastSearcher<Check>::Visit(PlayerMapType& m)
+void TrinityCore::PlayerLastSearcher<Check>::Visit(PlayerMapType& m)
 {
     for (PlayerMapType::iterator itr = m.begin(); itr != m.end(); ++itr)
     {
@@ -570,7 +570,7 @@ void WoWSource::PlayerLastSearcher<Check>::Visit(PlayerMapType& m)
 }
 
 template<class Builder>
-void WoWSource::LocalizedPacketDo<Builder>::operator()(Player* p)
+void TrinityCore::LocalizedPacketDo<Builder>::operator()(Player* p)
 {
     LocaleConstant loc_idx = p->GetSession()->GetSessionDbLocaleIndex();
     uint32 cache_idx = loc_idx+1;
@@ -595,7 +595,7 @@ void WoWSource::LocalizedPacketDo<Builder>::operator()(Player* p)
 }
 
 template<class Builder>
-void WoWSource::LocalizedPacketListDo<Builder>::operator()(Player* p)
+void TrinityCore::LocalizedPacketListDo<Builder>::operator()(Player* p)
 {
     LocaleConstant loc_idx = p->GetSession()->GetSessionDbLocaleIndex();
     uint32 cache_idx = loc_idx+1;

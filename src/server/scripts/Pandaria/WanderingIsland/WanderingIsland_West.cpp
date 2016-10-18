@@ -422,7 +422,7 @@ public:
             if (playerList.empty())
                 return NULL;
 
-            WoWSource::Containers::RandomResizeList(playerList, 1);
+            TrinityCore::Containers::RandomResizeList(playerList, 1);
 
             return *playerList.begin();
         }

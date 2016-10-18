@@ -337,8 +337,8 @@ public:
                 case NPC_RIMOK:                 return rimokGuid;
                 case NPC_RAIGONN:               return raigonnGuid;
                 case NPC_WEAK_SPOT:             return raigonWeakGuid;
-                case DATA_RANDOM_BOMBARDER:     return WoWSource::Containers::SelectRandomContainerElement(bombarderGuids);
-                case DATA_RANDOM_BOMB_STALKER:  return WoWSource::Containers::SelectRandomContainerElement(bombStalkerGuids);
+                case DATA_RANDOM_BOMBARDER:     return TrinityCore::Containers::SelectRandomContainerElement(bombarderGuids);
+                case DATA_RANDOM_BOMB_STALKER:  return TrinityCore::Containers::SelectRandomContainerElement(bombStalkerGuids);
             }
 
             return 0;

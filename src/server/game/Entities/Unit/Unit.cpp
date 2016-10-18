@@ -652,7 +652,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
 
     // Log damage > 1 000 000 on worldboss
     if (damage > 1000000 && GetTypeId() == TYPEID_PLAYER && victim->GetTypeId() == TYPEID_UNIT && victim->ToCreature()->GetCreatureTemplate()->rank)
-        sLog->OutPandashan("World Boss %u [%s] take more than 1M damage (%u) by player %u [%s] with spell %u", victim->GetEntry(), victim->GetName(), damage, GetGUIDLow(), GetName(), spellProto ? spellProto->Id : 0);
+        sLog->OutTrinityCore("World Boss %u [%s] take more than 1M damage (%u) by player %u [%s] with spell %u", victim->GetEntry(), victim->GetName(), damage, GetGUIDLow(), GetName(), spellProto ? spellProto->Id : 0);
 
     // need for operations with Player class
     Player* plr = victim->ToPlayer();
@@ -813,7 +813,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
         if (targetList.size() > 1)
         {
             targetList.remove(this); // Remove Player
-            targetList.sort(WoWSource::HealthPctOrderPred());
+            targetList.sort(TrinityCore::HealthPctOrderPred());
             targetList.resize(1);
         }
 
@@ -2083,7 +2083,7 @@ void Unit::CalcAbsorbResist(Unit* victim, SpellSchoolMask schoolMask, DamageEffe
     // We're going to call functions which can modify content of the list during iteration over it's elements
     // Let's copy the list so we can prevent iterator invalidation
     AuraEffectList vSchoolAbsorbCopy(victim->GetAuraEffectsByType(SPELL_AURA_SCHOOL_ABSORB));
-    vSchoolAbsorbCopy.sort(WoWSource::AbsorbAuraOrderPred());
+    vSchoolAbsorbCopy.sort(TrinityCore::AbsorbAuraOrderPred());
 
     // absorb without mana cost
     for (AuraEffectList::iterator itr = vSchoolAbsorbCopy.begin(); (itr != vSchoolAbsorbCopy.end()) && (dmgInfo.GetDamage() > 0); ++itr)
@@ -5764,7 +5764,7 @@ void Unit::SendSpellDamageResist(Unit* target, uint32 spellId)
 
 void Unit::SendMessageUnfriendlyToSetInRange(WorldPacket* data, float fist)
 {
-    WoWSource::UnfriendlyMessageDistDeliverer notifier(this, data, GetVisibilityRange());
+    TrinityCore::UnfriendlyMessageDistDeliverer notifier(this, data, GetVisibilityRange());
     VisitNearbyWorldObject(GetVisibilityRange(), notifier);
 }
 
@@ -7438,8 +7438,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffectPtr trigge
 
                     
                     std::list<Player*> plrList;
-                    WoWSource::AnyFriendlyUnitInObjectRangeCheck check(this, this, 15.0f);
-                    WoWSource::PlayerListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(this, plrList, check);
+                    TrinityCore::AnyFriendlyUnitInObjectRangeCheck check(this, this, 15.0f);
+                    TrinityCore::PlayerListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(this, plrList, check);
                     VisitNearbyObject(15.0f, searcher);
                     if (plrList.empty())
                         return false;
@@ -7449,7 +7449,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffectPtr trigge
                     if (plrList.empty())
                         return false;
 
-                    plrList.sort(WoWSource::HealthPctOrderPred());
+                    plrList.sort(TrinityCore::HealthPctOrderPred());
                     plrList.resize(1);
 
                     int32 bp0 = damage;
@@ -8035,8 +8035,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffectPtr trigge
 
                     
                     std::list<Player*> plrList;
-                    WoWSource::AnyFriendlyUnitInObjectRangeCheck check(this, this, 15.0f);
-                    WoWSource::PlayerListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(this, plrList, check);
+                    TrinityCore::AnyFriendlyUnitInObjectRangeCheck check(this, this, 15.0f);
+                    TrinityCore::PlayerListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(this, plrList, check);
                     VisitNearbyObject(15.0f, searcher);
                     if (plrList.empty())
                         return false;
@@ -8046,7 +8046,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffectPtr trigge
                     if (plrList.empty())
                         return false;
 
-                    plrList.sort(WoWSource::HealthPctOrderPred());
+                    plrList.sort(TrinityCore::HealthPctOrderPred());
                     plrList.resize(1);
 
                     int32 bp0 = int32(CalculatePct(damage, 10));
@@ -12244,13 +12244,13 @@ int32 Unit::DealHeal(Unit* victim, uint32 addhealth, SpellInfo const* spellProto
         {
             std::list<Unit*> targetList;
 
-            WoWSource::AnyFriendlyUnitInObjectRangeCheck u_check(unit, unit, 6.0f);
-            WoWSource::UnitListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(unit, targetList, u_check);
+            TrinityCore::AnyFriendlyUnitInObjectRangeCheck u_check(unit, unit, 6.0f);
+            TrinityCore::UnitListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(unit, targetList, u_check);
             unit->VisitNearbyObject(6.0f, searcher);
 
             if (!targetList.empty())
             {
-                targetList.sort(WoWSource::HealthPctOrderPred());
+                targetList.sort(TrinityCore::HealthPctOrderPred());
 
                 for (auto itr : targetList)
                 {
@@ -18504,15 +18504,15 @@ void Unit::UpdateReactives(uint32 p_time)
 
 void Unit::GetAttackableUnitListInRange(std::list<Unit*> &list, float fMaxSearchRange) const
 {
-    CellCoord p(WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY()));
+    CellCoord p(TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY()));
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::AnyUnitInObjectRangeCheck u_check(this, fMaxSearchRange);
-    WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck> searcher(this, list, u_check);
+    TrinityCore::AnyUnitInObjectRangeCheck u_check(this, fMaxSearchRange);
+    TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck> searcher(this, list, u_check);
 
-    TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck>, WorldTypeMapContainer > world_unit_searcher(searcher);
-    TypeContainerVisitor<WoWSource::UnitListSearcher<WoWSource::AnyUnitInObjectRangeCheck>, GridTypeMapContainer >  grid_unit_searcher(searcher);
+    TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck>, WorldTypeMapContainer > world_unit_searcher(searcher);
+    TypeContainerVisitor<TrinityCore::UnitListSearcher<TrinityCore::AnyUnitInObjectRangeCheck>, GridTypeMapContainer >  grid_unit_searcher(searcher);
 
     cell.Visit(p, world_unit_searcher, *GetMap(), *this, fMaxSearchRange);
     cell.Visit(p, grid_unit_searcher, *GetMap(), *this, fMaxSearchRange);
@@ -18521,8 +18521,8 @@ void Unit::GetAttackableUnitListInRange(std::list<Unit*> &list, float fMaxSearch
 Unit* Unit::SelectNearbyTarget(Unit* exclude, float dist) const
 {
     std::list<Unit*> targets;
-    WoWSource::AnyUnfriendlyUnitInObjectRangeCheck u_check(this, this, dist);
-    WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyUnitInObjectRangeCheck> searcher(this, targets, u_check);
+    TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck u_check(this, this, dist);
+    TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck> searcher(this, targets, u_check);
     VisitNearbyObject(dist, searcher);
 
     // remove current target
@@ -18546,14 +18546,14 @@ Unit* Unit::SelectNearbyTarget(Unit* exclude, float dist) const
         return NULL;
 
     // select random
-    return WoWSource::Containers::SelectRandomContainerElement(targets);
+    return TrinityCore::Containers::SelectRandomContainerElement(targets);
 }
 
 Unit* Unit::SelectNearbyAlly(Unit* exclude, float dist) const
 {
     std::list<Unit*> targets;
-    WoWSource::AnyFriendlyUnitInObjectRangeCheck u_check(this, this, dist);
-    WoWSource::UnitListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(this, targets, u_check);
+    TrinityCore::AnyFriendlyUnitInObjectRangeCheck u_check(this, this, dist);
+    TrinityCore::UnitListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(this, targets, u_check);
     VisitNearbyObject(dist, searcher);
 
     if (exclude)
@@ -18573,7 +18573,7 @@ Unit* Unit::SelectNearbyAlly(Unit* exclude, float dist) const
         return NULL;
 
     // select random
-    return WoWSource::Containers::SelectRandomContainerElement(targets);
+    return TrinityCore::Containers::SelectRandomContainerElement(targets);
 }
 
 void Unit::ApplyAttackTimePercentMod(WeaponAttackType att, float val, bool apply)
@@ -20349,7 +20349,7 @@ public:
 
     virtual bool Execute(uint64 , uint32)
     {
-        WoWSource::AIRelocationNotifier notifier(m_owner);
+        TrinityCore::AIRelocationNotifier notifier(m_owner);
         m_owner.VisitNearbyObject(m_owner.GetVisibilityRange(), notifier);
         return true;
     }
@@ -21449,7 +21449,7 @@ bool Unit::HandleSpellClick(Unit* clicker, int8 seatId)
         // if (!spellEntry) should be checked at npc_spellclick load
         if (!spellEntry)
         {
-            sLog->OutPandashan("HandleSpellClick: spellEntry pointer is NULL!!");
+            sLog->OutTrinityCore("HandleSpellClick: spellEntry pointer is NULL!!");
             return false;
         }
 
@@ -21834,7 +21834,7 @@ void Unit::SendTeleportPacket(Position &oldPos)
 bool Unit::UpdatePosition(float x, float y, float z, float orientation, bool teleport)
 {
     // prevent crash when a bad coord is sent by the client
-    if (!WoWSource::IsValidMapCoord(x, y, z, orientation))
+    if (!TrinityCore::IsValidMapCoord(x, y, z, orientation))
         return false;
 
     bool turn = (GetOrientation() != orientation);

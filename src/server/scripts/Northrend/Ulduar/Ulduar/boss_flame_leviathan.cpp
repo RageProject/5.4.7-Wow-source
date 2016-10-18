@@ -1758,7 +1758,7 @@ class spell_pursue : public SpellScriptLoader
                 }
 
                 //! In the end, only one target should be selected
-                _target = WoWSource::Containers::SelectRandomContainerElement(targets);
+                _target = TrinityCore::Containers::SelectRandomContainerElement(targets);
                 FilterTargetsSubsequently(targets);
             }
 
@@ -1822,8 +1822,8 @@ class spell_vehicle_throw_passenger : public SpellScriptLoader
                         {
                             // use 99 because it is 3d search
                             std::list<WorldObject*> targetList;
-                            WoWSource::WorldObjectSpellAreaTargetCheck check(99, GetExplTargetDest(), GetCaster(), GetCaster(), GetSpellInfo(), TARGET_CHECK_DEFAULT, NULL);
-                            WoWSource::WorldObjectListSearcher<WoWSource::WorldObjectSpellAreaTargetCheck> searcher(GetCaster(), targetList, check);
+                            TrinityCore::WorldObjectSpellAreaTargetCheck check(99, GetExplTargetDest(), GetCaster(), GetCaster(), GetSpellInfo(), TARGET_CHECK_DEFAULT, NULL);
+                            TrinityCore::WorldObjectListSearcher<TrinityCore::WorldObjectSpellAreaTargetCheck> searcher(GetCaster(), targetList, check);
                             GetCaster()->GetMap()->VisitAll(GetCaster()->m_positionX, GetCaster()->m_positionY, 99, searcher);
                             float minDist = 99 * 99;
                             Unit* target = NULL;

@@ -368,7 +368,7 @@ class AuraEffect : public std::enable_shared_from_this<AuraEffect>
         void HandleChangeSpellVisualEffect(AuraApplication const* aurApp, uint8 mode, bool apply) const;
 };
 
-namespace WoWSource
+namespace TrinityCore
 {
     // Binary predicate for sorting the priority of absorption aura effects
     class AbsorbAuraOrderPred

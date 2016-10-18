@@ -436,7 +436,7 @@ void World::LoadConfigSettings(bool reload)
 
     ///- Read the player limit and the Message of the day from the config file
     SetPlayerAmountLimit(ConfigMgr::GetIntDefault("PlayerLimit", 1000));
-    SetMotd(ConfigMgr::GetStringDefault("Motd", "Welcome to WoWSource V3-548."));
+    SetMotd(ConfigMgr::GetStringDefault("Motd", "Welcome to TrinityCore V3-548."));
 
     ///- Read ticket system setting from the config file
     m_bool_configs[CONFIG_ALLOW_TICKETS] = ConfigMgr::GetBoolDefault("AllowTickets", true);
@@ -2375,7 +2375,7 @@ void World::SendGlobalGMMessage(WorldPacket* packet, WorldSession* self, uint32 
     }
 }
 
-namespace WoWSource
+namespace TrinityCore
 {
     class WorldWorldTextBuilder
     {
@@ -2418,7 +2418,7 @@ namespace WoWSource
             int32 i_textId;
             va_list* i_args;
     };
-}                                                           // namespace WoWSource
+}                                                           // namespace TrinityCore
 
 /// Send a System Message to all players (except self if mentioned)
 void World::SendWorldText(int32 string_id, ...)
@@ -2426,8 +2426,8 @@ void World::SendWorldText(int32 string_id, ...)
     va_list ap;
     va_start(ap, string_id);
 
-    WoWSource::WorldWorldTextBuilder wt_builder(string_id, &ap);
-    WoWSource::LocalizedPacketListDo<WoWSource::WorldWorldTextBuilder> wt_do(wt_builder);
+    TrinityCore::WorldWorldTextBuilder wt_builder(string_id, &ap);
+    TrinityCore::LocalizedPacketListDo<TrinityCore::WorldWorldTextBuilder> wt_do(wt_builder);
     for (SessionMap::const_iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
     {
         if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
@@ -2445,8 +2445,8 @@ void World::SendGMText(int32 string_id, ...)
     va_list ap;
     va_start(ap, string_id);
 
-    WoWSource::WorldWorldTextBuilder wt_builder(string_id, &ap);
-    WoWSource::LocalizedPacketListDo<WoWSource::WorldWorldTextBuilder> wt_do(wt_builder);
+    TrinityCore::WorldWorldTextBuilder wt_builder(string_id, &ap);
+    TrinityCore::LocalizedPacketListDo<TrinityCore::WorldWorldTextBuilder> wt_do(wt_builder);
     for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
     {
         if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
@@ -2933,7 +2933,7 @@ void World::SendAutoBroadcast()
 
     std::string msg;
 
-    msg = WoWSource::Containers::SelectRandomContainerElement(m_Autobroadcasts);
+    msg = TrinityCore::Containers::SelectRandomContainerElement(m_Autobroadcasts);
 
     uint32 abcenter = sWorld->getIntConfig(CONFIG_AUTOBROADCAST_CENTER);
 
@@ -3129,7 +3129,7 @@ void World::ResetCurrencyWeekCap()
     m_NextCurrencyReset = time_t(m_NextCurrencyReset + DAY * getIntConfig(CONFIG_CURRENCY_RESET_INTERVAL));
     sWorld->setWorldState(WS_CURRENCY_RESET_TIME, uint64(m_NextCurrencyReset));
 
-    sLog->OutPandashan("World::ResetCurrencyWeekCap()");
+    sLog->OutTrinityCore("World::ResetCurrencyWeekCap()");
 }
 
 void World::LoadDBAllowedSecurityLevel()

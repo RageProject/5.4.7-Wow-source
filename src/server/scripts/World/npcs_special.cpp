@@ -2018,8 +2018,8 @@ public:
                 return;
 
             std::list<Unit*> targets;
-            WoWSource::AnyUnfriendlyUnitInObjectRangeCheck u_check(me, me, 60);
-            WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyUnitInObjectRangeCheck> searcher(me, targets, u_check);
+            TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck u_check(me, me, 60);
+            TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck> searcher(me, targets, u_check);
             me->VisitNearbyObject(30, searcher);
             for (std::list<Unit*>::const_iterator itr = targets.begin(); itr != targets.end(); ++itr)
             {
@@ -4447,8 +4447,8 @@ class npc_ring_of_frost : public CreatureScript
 
                 // Find all the enemies
                 std::list<Unit*> targets;
-                WoWSource::AnyUnfriendlyUnitInObjectRangeCheck u_check(me, me, 5.0f);
-                WoWSource::UnitListSearcher<WoWSource::AnyUnfriendlyUnitInObjectRangeCheck> searcher(me, targets, u_check);
+                TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck u_check(me, me, 5.0f);
+                TrinityCore::UnitListSearcher<TrinityCore::AnyUnfriendlyUnitInObjectRangeCheck> searcher(me, targets, u_check);
                 me->VisitNearbyObject(5.0f, searcher);
                 for (std::list<Unit*>::const_iterator iter = targets.begin(); iter != targets.end(); ++iter)
                     if (!(*iter)->isTotem())
@@ -4817,8 +4817,8 @@ class npc_void_tendrils : public CreatureScript
 
             void Reset()
             {
-				if (!me->HasAura(SPELL_ROOT_FOR_EVER))
-					me->AddAura(SPELL_ROOT_FOR_EVER, me);
+				//if (!me->HasAura(SPELL_ROOT_FOR_EVER))
+					//me->AddAura(SPELL_ROOT_FOR_EVER, me);
             }
 
             void SetGUID(uint64 guid, int32)
@@ -4845,7 +4845,7 @@ class npc_void_tendrils : public CreatureScript
                     me->SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, 0.0f);
                     me->SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, 0.0f);
 
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
                 }
                 else
                     me->DespawnOrUnsummon();
@@ -4942,8 +4942,8 @@ class npc_spectral_guise : public CreatureScript
 
             void Reset()
             {
-                if (!me->HasAura(SPELL_ROOT_FOR_EVER))
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                //if (!me->HasAura(SPELL_ROOT_FOR_EVER))
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
             }
 
             void IsSummonedBy(Unit* owner)
@@ -4954,7 +4954,7 @@ class npc_spectral_guise : public CreatureScript
                     me->SetMaxHealth(owner->GetMaxHealth() / 2);
                     me->SetHealth(me->GetMaxHealth());
 
-                    owner->AddAura(SPELL_INITIALIZE_IMAGES, me);
+                    //owner->AddAura(SPELL_INITIALIZE_IMAGES, me);
                     owner->AddAura(SPELL_SPECTRAL_GUISE_CLONE, me);
 
                     me->CastSpell(me, SPELL_SPECTRAL_GUISE_CHARGES, true);
@@ -4972,7 +4972,7 @@ class npc_spectral_guise : public CreatureScript
                     me->SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, 0.0f);
                     me->SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, 0.0f);
 
-                    me->AddAura(SPELL_ROOT_FOR_EVER, me);
+                    //me->AddAura(SPELL_ROOT_FOR_EVER, me);
                 }
                 else
                     me->DespawnOrUnsummon();
@@ -5221,14 +5221,14 @@ class npc_custom_caster_guard : public CreatureScript
                         UnitList targets;
                         DebuffCheck u_check(me, me->GetOwnerGUID());
                         
-                        WoWSource::UnitListSearcher<DebuffCheck> searcher(me, targets, u_check);
+                        TrinityCore::UnitListSearcher<DebuffCheck> searcher(me, targets, u_check);
                         me->VisitNearbyObject(100.0f, searcher);
                         if (!targets.empty())
                         {
                             if (targets.size() > 1)
                             {
-                                targets.sort(WoWSource::DistanceOrderPred(me));
-                                WoWSource::Containers::RandomResizeList(targets, 1);
+                                targets.sort(TrinityCore::DistanceOrderPred(me));
+                                TrinityCore::Containers::RandomResizeList(targets, 1);
                             }
                             Unit* newTarget = *(targets.begin());
                             if (me->getVictim() != newTarget)

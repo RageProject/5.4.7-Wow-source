@@ -1108,7 +1108,7 @@ class boss_leviathan_mk_turret : public CreatureScript
                     if (playerList.empty())
                         return SelectTarget(SELECT_TARGET_RANDOM, 0, 100.0f, true);
                     else
-                        return WoWSource::Containers::SelectRandomContainerElement(playerList);
+                        return TrinityCore::Containers::SelectRandomContainerElement(playerList);
                 }
                 else
                     return 0;
@@ -2058,8 +2058,8 @@ class npc_mimiron_bomb_bot : public CreatureScript
             Unit* SelectPlayerTargetInRange(float range)
             {
                 Player* target = 0;
-                WoWSource::AnyPlayerInObjectRangeCheck u_check(me, range, true);
-                WoWSource::PlayerSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(me, target, u_check);
+                TrinityCore::AnyPlayerInObjectRangeCheck u_check(me, range, true);
+                TrinityCore::PlayerSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(me, target, u_check);
                 me->VisitNearbyObject(range, searcher);
                 return target;
             }
@@ -2342,7 +2342,7 @@ class spell_frost_bomb : public SpellScriptLoader
                 if (targets.empty())
                     return;
 
-                _target = WoWSource::Containers::SelectRandomContainerElement(targets);
+                _target = TrinityCore::Containers::SelectRandomContainerElement(targets);
                 targets.clear();
                 targets.push_back(_target);
             }

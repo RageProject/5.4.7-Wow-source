@@ -674,7 +674,7 @@ class npc_warmaster_blackhorn_goriona: public CreatureScript
                             std::list<Creature*> creatures;
                             me->GetCreatureListWithEntryInGrid(creatures, NPC_ONSLAUGHT_TARGET, 300.0f);
                             if (!creatures.empty())
-                                if (Unit* pTarget = WoWSource::Containers::SelectRandomContainerElement(creatures))
+                                if (Unit* pTarget = TrinityCore::Containers::SelectRandomContainerElement(creatures))
                                 {
                                     pTarget->CastSpell(pTarget, SPELL_TWILIGHT_ONSLAUGHT_DUMMY_1, true);
                                     me->CastSpell(pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), SPELL_TWILIGHT_ONSLAUGHT, false);
@@ -1610,7 +1610,7 @@ class npc_dragon_soul_sky_captain_swayze : public CreatureScript
             {
                 Player* player = NULL;
                 AnyLivePlayerNoGmCheck check(me, 200.0f);
-                WoWSource::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
+                TrinityCore::PlayerSearcher<AnyLivePlayerNoGmCheck> searcher(me, player, check);
                 me->VisitNearbyWorldObject(200.0f, searcher);
                 return (player ? true : false);
             }
@@ -1795,7 +1795,7 @@ class spell_warmaster_blackhorn_consuming_shroud : public SpellScriptLoader
                 }
 
                 if (targets.size() > 1)
-                    WoWSource::Containers::RandomResizeList(targets, 1);
+                    TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void Register()
@@ -1890,10 +1890,10 @@ class spell_warmaster_blackhorn_shockwave_aoe : public SpellScriptLoader
                 if (new_targets.size() >=2)
                 {
                     targets.clear();
-                    targets.push_back(WoWSource::Containers::SelectRandomContainerElement(new_targets));
+                    targets.push_back(TrinityCore::Containers::SelectRandomContainerElement(new_targets));
                 }
                 else
-                    WoWSource::Containers::RandomResizeList(targets, 1);
+                    TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void HandleDummy(SpellEffIndex /*effIndex*/)

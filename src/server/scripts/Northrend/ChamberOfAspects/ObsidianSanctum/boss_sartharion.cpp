@@ -539,8 +539,8 @@ public:
         void CastLavaStrikeOnTarget(Unit* target)
         {
             std::list<Creature*> pFireCyclonesList;
-            WoWSource::AllCreaturesOfEntryInRange checker(me, NPC_FIRE_CYCLONE, 200.0f);
-            WoWSource::CreatureListSearcher<WoWSource::AllCreaturesOfEntryInRange> searcher(me, pFireCyclonesList, checker);
+            TrinityCore::AllCreaturesOfEntryInRange checker(me, NPC_FIRE_CYCLONE, 200.0f);
+            TrinityCore::CreatureListSearcher<TrinityCore::AllCreaturesOfEntryInRange> searcher(me, pFireCyclonesList, checker);
             me->VisitNearbyObject(200.0f, searcher);
 
             if (pFireCyclonesList.empty())

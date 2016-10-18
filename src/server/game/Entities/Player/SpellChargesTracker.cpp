@@ -1,6 +1,6 @@
 #include "SpellChargesTracker.h"
 
-namespace WoWSource
+namespace TrinityCore
 {
     void SpellChargesTracker::consume(std::uint32_t spellId, std::uint32_t regenTimer)
     {
@@ -43,4 +43,4 @@ namespace WoWSource
             ++i;
         }
     }
-} // namespace WoWSource
+} // namespace TrinityCore

@@ -84,8 +84,8 @@ void TotemAI::UpdateAI(uint32 const /*diff*/)
         me->IsFriendlyTo(victim) || !me->canSeeOrDetect(victim) || victim->HasCrowdControlAura())
     {
         victim = NULL;
-        WoWSource::NearestAttackableNoCCUnitInObjectRangeCheck u_check(me, me, max_range);
-        WoWSource::UnitLastSearcher<WoWSource::NearestAttackableNoCCUnitInObjectRangeCheck> checker(me, victim, u_check);
+        TrinityCore::NearestAttackableNoCCUnitInObjectRangeCheck u_check(me, me, max_range);
+        TrinityCore::UnitLastSearcher<TrinityCore::NearestAttackableNoCCUnitInObjectRangeCheck> checker(me, victim, u_check);
         me->VisitNearbyObject(max_range, checker);
     }
 

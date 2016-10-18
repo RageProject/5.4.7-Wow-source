@@ -228,7 +228,7 @@ class boss_echo_of_jaina : public CreatureScript
                             me->GetCreatureListWithEntryInGrid(creatures, NPC_BLINK_TARGET, 40.0f);
                             if (!creatures.empty())
                             {
-                                WoWSource::Containers::RandomResizeList(creatures, 1);
+                                TrinityCore::Containers::RandomResizeList(creatures, 1);
                                 DoCast(me, SPELL_BLINK, true);
                                 if (Creature* pTarget = creatures.front())
                                     me->NearTeleportTo(pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0.0f, true);

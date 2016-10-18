@@ -122,9 +122,9 @@ public:
         std::string uptime          = secsToTimeString(sWorld->GetUptime());
         uint32 updateTime           = sWorld->GetUpdateTime();
 
-        handler->PSendSysMessage("WoWSource MoP Development 5.4.8");
-        handler->PSendSysMessage("WoWSource Core: Last Update: 03.07.2015 Updatepack: 2");
-        handler->PSendSysMessage("WoWSource DB: Last Update: 03.07.2015 Updatepack: 20");
+        handler->PSendSysMessage("TrinityCore MoP Development 5.4.8");
+        handler->PSendSysMessage("TrinityCore Core: Last Update: 03.07.2015 Updatepack: 2");
+        handler->PSendSysMessage("TrinityCore DB: Last Update: 03.07.2015 Updatepack: 20");
         handler->PSendSysMessage(LANG_CONNECTED_USERS, activeClientsNum, maxActiveClientsNum, queuedClientsNum, maxQueuedClientsNum);
         handler->PSendSysMessage(LANG_UPTIME, uptime.c_str());
         handler->PSendSysMessage("Server delay: %u ms", updateTime);

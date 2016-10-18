@@ -1,7 +1,7 @@
 /*
 Pandaria
 World boss
-Antoine Vallee for Pandashan Servers
+Antoine Vallee for TrinityCore Servers
 
 */
 #include "ScriptMgr.h"

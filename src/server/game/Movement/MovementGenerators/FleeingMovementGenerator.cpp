@@ -157,8 +157,8 @@ bool FleeingMovementGenerator<T>::_getPoint(T &owner, float &x, float &y, float 
             temp_y += distance/5 * sin(angle);
             float _temp_x = temp_x;
             float _temp_y = temp_y;
-            WoWSource::NormalizeMapCoord(_temp_x);
-            WoWSource::NormalizeMapCoord(_temp_y);
+            TrinityCore::NormalizeMapCoord(_temp_x);
+            TrinityCore::NormalizeMapCoord(_temp_y);
             float _temp_z = _map->GetHeight(temp_x, temp_y, z, true);
             if (fabs(_temp_z - temp_z) > 2.0f)
             {
@@ -175,8 +175,8 @@ bool FleeingMovementGenerator<T>::_getPoint(T &owner, float &x, float &y, float 
         if (!goodCoordinates)
             continue;
 
-        WoWSource::NormalizeMapCoord(temp_x);
-        WoWSource::NormalizeMapCoord(temp_y);
+        TrinityCore::NormalizeMapCoord(temp_x);
+        TrinityCore::NormalizeMapCoord(temp_y);
         if (!owner.IsWithinLOS(temp_x, temp_y, z))
             continue;
         else

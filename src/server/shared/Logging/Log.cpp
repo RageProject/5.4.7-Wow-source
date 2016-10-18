@@ -34,16 +34,16 @@ Log::Log() : worker(NULL)
 	SetRealmID(0);
 	m_logsTimestamp = "_" + GetTimestampStr();
 	LoadFromConfig();
-	//wowsourceLog = fopen("wowsource.log", "a");
+	//TrinityCoreLog = fopen("TrinityCore.log", "a");
 }
 
 Log::~Log()
 {
 	Close();
 
-	fclose(wowsourceLog);
-	delete wowsourceLog;
-	wowsourceLog = NULL;
+	fclose(TrinityCoreLog);
+	delete TrinityCoreLog;
+	TrinityCoreLog = NULL;
 }
 
 uint8 Log::NextAppenderId()
@@ -557,7 +557,7 @@ void Log::outArena(const char * str, ...)
 	log->str = query;
 }
 
-void Log::OutPandashan(const char* str, ...)
+void Log::OutTrinityCore(const char* str, ...)
 {
 	if (!str)
 		return;

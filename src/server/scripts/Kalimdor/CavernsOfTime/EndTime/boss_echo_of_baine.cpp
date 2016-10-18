@@ -271,7 +271,7 @@ class spell_echo_of_baine_pulverize_aoe : public SpellScriptLoader
 
                 targets.clear();
                 if (!tempList.empty())
-                    targets.push_back(WoWSource::Containers::SelectRandomContainerElement(tempList));
+                    targets.push_back(TrinityCore::Containers::SelectRandomContainerElement(tempList));
             }
 
             void HandleDummy(SpellEffIndex /*effIndex*/)

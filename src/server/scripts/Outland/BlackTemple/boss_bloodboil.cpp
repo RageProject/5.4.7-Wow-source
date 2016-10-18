@@ -159,7 +159,7 @@ public:
             }
 
             //Sort the list of players
-            targets.sort(WoWSource::ObjectDistanceOrderPred(me, false));
+            targets.sort(TrinityCore::ObjectDistanceOrderPred(me, false));
             //Resize so we only get top 5
             targets.resize(5);
 

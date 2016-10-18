@@ -475,7 +475,7 @@ class boss_steelbreaker : public CreatureScript
                             return 0;
                     }
 
-                    return WoWSource::Containers::SelectRandomContainerElement(playerList);
+                    return TrinityCore::Containers::SelectRandomContainerElement(playerList);
                 }
                 else
                     return 0;

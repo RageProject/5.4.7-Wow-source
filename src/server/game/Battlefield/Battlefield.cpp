@@ -1031,8 +1031,8 @@ bool BfCapturePoint::Update(uint32 diff)
     }
 
     std::list<Player*> players;
-    WoWSource::AnyPlayerInObjectRangeCheck checker(m_capturePoint, radius);
-    WoWSource::PlayerListSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(m_capturePoint, players, checker);
+    TrinityCore::AnyPlayerInObjectRangeCheck checker(m_capturePoint, radius);
+    TrinityCore::PlayerListSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(m_capturePoint, players, checker);
     m_capturePoint->VisitNearbyWorldObject(radius, searcher);
 
     for (std::list<Player*>::iterator itr = players.begin(); itr != players.end(); ++itr)

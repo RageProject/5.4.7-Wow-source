@@ -1203,8 +1203,8 @@ class debug_commandscript : public CommandScript
             else
             {
                 Creature* passenger = NULL;
-                WoWSource::AllCreaturesOfEntryInRange check(handler->GetSession()->GetPlayer(), entry, 20.0f);
-                WoWSource::CreatureSearcher<WoWSource::AllCreaturesOfEntryInRange> searcher(handler->GetSession()->GetPlayer(), passenger, check);
+                TrinityCore::AllCreaturesOfEntryInRange check(handler->GetSession()->GetPlayer(), entry, 20.0f);
+                TrinityCore::CreatureSearcher<TrinityCore::AllCreaturesOfEntryInRange> searcher(handler->GetSession()->GetPlayer(), passenger, check);
                 handler->GetSession()->GetPlayer()->VisitNearbyObject(30.0f, searcher);
                 if (!passenger || passenger == target)
                     return false;

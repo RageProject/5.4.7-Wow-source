@@ -1292,7 +1292,7 @@ void Position::MovePosition(Position &pos, float dist, float angle, WorldObject*
     desty = pos.m_positionY + dist * std::sin(angle);
 
     // Prevent invalid coordinates here, position is unchanged
-    if (!WoWSource::IsValidMapCoord(destx, desty))
+    if (!TrinityCore::IsValidMapCoord(destx, desty))
     {
         sLog->outFatal(LOG_FILTER_GENERAL, "Position::MovePosition invalid coordinates X: %f and Y: %f were passed!", destx, desty);
         return;
@@ -1323,8 +1323,8 @@ void Position::MovePosition(Position &pos, float dist, float angle, WorldObject*
         }
     }
 
-    WoWSource::NormalizeMapCoord(pos.m_positionX);
-    WoWSource::NormalizeMapCoord(pos.m_positionY);
+    TrinityCore::NormalizeMapCoord(pos.m_positionX);
+    TrinityCore::NormalizeMapCoord(pos.m_positionY);
     object->UpdateGroundPositionZ(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
     pos.SetOrientation(GetOrientation());
 }
@@ -1827,8 +1827,8 @@ void WorldObject::GetRandomPoint(const Position &pos, float distance, float &ran
     rand_y = pos.m_positionY + new_dist * std::sin(angle);
     rand_z = pos.m_positionZ;
 
-    WoWSource::NormalizeMapCoord(rand_x);
-    WoWSource::NormalizeMapCoord(rand_y);
+    TrinityCore::NormalizeMapCoord(rand_x);
+    TrinityCore::NormalizeMapCoord(rand_y);
     UpdateGroundPositionZ(rand_x, rand_y, rand_z);            // update to LOS height if available
 }
 
@@ -1905,7 +1905,7 @@ void WorldObject::UpdateAllowedPositionZ(float x, float y, float &z) const
 
 bool Position::IsPositionValid() const
 {
-    return WoWSource::IsValidMapCoord(m_positionX, m_positionY, m_positionZ, m_orientation);
+    return TrinityCore::IsValidMapCoord(m_positionX, m_positionY, m_positionZ, m_orientation);
 }
 
 float WorldObject::GetGridActivationRange() const
@@ -2232,7 +2232,7 @@ void Object::ForceValuesUpdateAtIndex(uint32 i)
     }
 }
 
-namespace WoWSource
+namespace TrinityCore
 {
     class MonsterChatBuilder
     {
@@ -2273,68 +2273,68 @@ namespace WoWSource
             uint32 i_language;
             uint64 i_targetGUID;
     };
-}                                                           // namespace WoWSource
+}                                                           // namespace TrinityCore
 
 void WorldObject::MonsterSay(const char* text, uint32 language, uint64 TargetGuid)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::MonsterCustomChatBuilder say_build(*this, CHAT_MSG_MONSTER_SAY, text, language, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> say_do(say_build);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+    TrinityCore::MonsterCustomChatBuilder say_build(*this, CHAT_MSG_MONSTER_SAY, text, language, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> say_do(say_build);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> >, WorldTypeMapContainer > message(say_worker);
     cell.Visit(p, message, *GetMap(), *this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY));
 }
 
 void WorldObject::MonsterSay(int32 textId, uint32 language, uint64 TargetGuid)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_SAY, textId, language, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> say_do(say_build);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+    TrinityCore::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_SAY, textId, language, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> say_do(say_build);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), say_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
     cell.Visit(p, message, *GetMap(), *this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY));
 }
 
 void WorldObject::MonsterYell(const char* text, uint32 language, uint64 TargetGuid)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::MonsterCustomChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, text, language, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> say_do(say_build);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL), say_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterCustomChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+    TrinityCore::MonsterCustomChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, text, language, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> say_do(say_build);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL), say_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterCustomChatBuilder> >, WorldTypeMapContainer > message(say_worker);
     cell.Visit(p, message, *GetMap(), *this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL));
 }
 
 void WorldObject::MonsterYell(int32 textId, uint32 language, uint64 TargetGuid)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, textId, language, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> say_do(say_build);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL), say_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+    TrinityCore::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, textId, language, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> say_do(say_build);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL), say_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
     cell.Visit(p, message, *GetMap(), *this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_YELL));
 }
 
 void WorldObject::MonsterYellToZone(int32 textId, uint32 language, uint64 TargetGuid)
 {
-    WoWSource::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, textId, language, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> say_do(say_build);
+    TrinityCore::MonsterChatBuilder say_build(*this, CHAT_MSG_MONSTER_YELL, textId, language, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> say_do(say_build);
 
     uint32 zoneid = GetZoneId();
 
@@ -2353,15 +2353,15 @@ void WorldObject::MonsterTextEmote(const char* text, uint64 TargetGuid, bool IsB
 
 void WorldObject::MonsterTextEmote(int32 textId, uint64 TargetGuid, bool IsBossEmote)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
 
     Cell cell(p);
     cell.SetNoCreate();
 
-    WoWSource::MonsterChatBuilder say_build(*this, IsBossEmote ? CHAT_MSG_RAID_BOSS_EMOTE : CHAT_MSG_MONSTER_EMOTE, textId, LANG_UNIVERSAL, TargetGuid);
-    WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> say_do(say_build);
-    WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE), say_do);
-    TypeContainerVisitor<WoWSource::PlayerDistWorker<WoWSource::LocalizedPacketDo<WoWSource::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
+    TrinityCore::MonsterChatBuilder say_build(*this, IsBossEmote ? CHAT_MSG_RAID_BOSS_EMOTE : CHAT_MSG_MONSTER_EMOTE, textId, LANG_UNIVERSAL, TargetGuid);
+    TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> say_do(say_build);
+    TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> > say_worker(this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE), say_do);
+    TypeContainerVisitor<TrinityCore::PlayerDistWorker<TrinityCore::LocalizedPacketDo<TrinityCore::MonsterChatBuilder> >, WorldTypeMapContainer > message(say_worker);
     cell.Visit(p, message, *GetMap(), *this, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE));
 }
 
@@ -2519,13 +2519,13 @@ void WorldObject::SendMessageToSet(WorldPacket* data, bool self)
 
 void WorldObject::SendMessageToSetInRange(WorldPacket* data, float dist, bool /*self*/)
 {
-    WoWSource::MessageDistDeliverer notifier(this, data, dist);
+    TrinityCore::MessageDistDeliverer notifier(this, data, dist);
     VisitNearbyWorldObject(dist, notifier);
 }
 
 void WorldObject::SendMessageToSet(WorldPacket* data, Player const* skipped_rcvr)
 {
-    WoWSource::MessageDistDeliverer notifier(this, data, GetVisibilityRange(), false, skipped_rcvr);
+    TrinityCore::MessageDistDeliverer notifier(this, data, GetVisibilityRange(), false, skipped_rcvr);
     VisitNearbyWorldObject(GetVisibilityRange(), notifier);
 }
 
@@ -2777,7 +2777,7 @@ TempSummon* WorldObject::SummonCreature(uint32 entry, const Position &pos, TempS
         m_summonCounter++;
         if (m_summonCounter > 40 && isType(TYPEMASK_PLAYER))
             if (entry != 10161 && entry != 29888 && entry != 65282)
-                sLog->OutPandashan("Player %u spam summon of creature %u [counter %u]", GetGUIDLow(), entry, m_summonCounter);
+                sLog->OutTrinityCore("Player %u spam summon of creature %u [counter %u]", GetGUIDLow(), entry, m_summonCounter);
     }
 
     if (Map* map = FindMap())
@@ -3069,8 +3069,8 @@ void WorldObject::SummonCreatureGroup(uint8 group, std::list<TempSummon*>& list)
 Creature* WorldObject::FindNearestCreature(uint32 entry, float range, bool alive) const
 {
     Creature* creature = NULL;
-    WoWSource::NearestCreatureEntryWithLiveStateInObjectRangeCheck checker(*this, entry, alive, range);
-    WoWSource::CreatureLastSearcher<WoWSource::NearestCreatureEntryWithLiveStateInObjectRangeCheck> searcher(this, creature, checker);
+    TrinityCore::NearestCreatureEntryWithLiveStateInObjectRangeCheck checker(*this, entry, alive, range);
+    TrinityCore::CreatureLastSearcher<TrinityCore::NearestCreatureEntryWithLiveStateInObjectRangeCheck> searcher(this, creature, checker);
     VisitNearbyObject(range, searcher);
     return creature;
 }
@@ -3078,8 +3078,8 @@ Creature* WorldObject::FindNearestCreature(uint32 entry, float range, bool alive
 GameObject* WorldObject::FindNearestGameObject(uint32 entry, float range) const
 {
     GameObject* go = NULL;
-    WoWSource::NearestGameObjectEntryInObjectRangeCheck checker(*this, entry, range);
-    WoWSource::GameObjectLastSearcher<WoWSource::NearestGameObjectEntryInObjectRangeCheck> searcher(this, go, checker);
+    TrinityCore::NearestGameObjectEntryInObjectRangeCheck checker(*this, entry, range);
+    TrinityCore::GameObjectLastSearcher<TrinityCore::NearestGameObjectEntryInObjectRangeCheck> searcher(this, go, checker);
     VisitNearbyGridObject(range, searcher);
     return go;
 }
@@ -3087,8 +3087,8 @@ GameObject* WorldObject::FindNearestGameObject(uint32 entry, float range) const
 GameObject* WorldObject::FindNearestGameObjectOfType(GameobjectTypes type, float range) const
 { 
     GameObject* go = NULL;
-    WoWSource::NearestGameObjectTypeInObjectRangeCheck checker(*this, type, range);
-    WoWSource::GameObjectLastSearcher<WoWSource::NearestGameObjectTypeInObjectRangeCheck> searcher(this, go, checker);
+    TrinityCore::NearestGameObjectTypeInObjectRangeCheck checker(*this, type, range);
+    TrinityCore::GameObjectLastSearcher<TrinityCore::NearestGameObjectTypeInObjectRangeCheck> searcher(this, go, checker);
     VisitNearbyGridObject(range, searcher);
     return go;
 }
@@ -3096,42 +3096,42 @@ GameObject* WorldObject::FindNearestGameObjectOfType(GameobjectTypes type, float
 Player* WorldObject::FindNearestPlayer(float range, bool alive)
 {
     Player* player = NULL;
-    WoWSource::AnyPlayerInObjectRangeCheck check(this, range);
-    WoWSource::PlayerSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(this, player, check);
+    TrinityCore::AnyPlayerInObjectRangeCheck check(this, range);
+    TrinityCore::PlayerSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(this, player, check);
     VisitNearbyWorldObject(range, searcher);
     return player;
 }
 
 void WorldObject::GetGameObjectListWithEntryInGrid(std::list<GameObject*>& gameobjectList, uint32 entry, float maxSearchRange) const
 {
-    CellCoord pair(WoWSource::ComputeCellCoord(this->GetPositionX(), this->GetPositionY()));
+    CellCoord pair(TrinityCore::ComputeCellCoord(this->GetPositionX(), this->GetPositionY()));
     Cell cell(pair);
     cell.SetNoCreate();
 
-    WoWSource::AllGameObjectsWithEntryInRange check(this, entry, maxSearchRange);
-    WoWSource::GameObjectListSearcher<WoWSource::AllGameObjectsWithEntryInRange> searcher(this, gameobjectList, check);
-    TypeContainerVisitor<WoWSource::GameObjectListSearcher<WoWSource::AllGameObjectsWithEntryInRange>, GridTypeMapContainer> visitor(searcher);
+    TrinityCore::AllGameObjectsWithEntryInRange check(this, entry, maxSearchRange);
+    TrinityCore::GameObjectListSearcher<TrinityCore::AllGameObjectsWithEntryInRange> searcher(this, gameobjectList, check);
+    TypeContainerVisitor<TrinityCore::GameObjectListSearcher<TrinityCore::AllGameObjectsWithEntryInRange>, GridTypeMapContainer> visitor(searcher);
 
     cell.Visit(pair, visitor, *(this->GetMap()), *this, maxSearchRange);
 }
 
 void WorldObject::GetCreatureListWithEntryInGrid(std::list<Creature*>& creatureList, uint32 entry, float maxSearchRange) const
 {
-    CellCoord pair(WoWSource::ComputeCellCoord(this->GetPositionX(), this->GetPositionY()));
+    CellCoord pair(TrinityCore::ComputeCellCoord(this->GetPositionX(), this->GetPositionY()));
     Cell cell(pair);
     cell.SetNoCreate();
 
-    WoWSource::AllCreaturesOfEntryInRange check(this, entry, maxSearchRange);
-    WoWSource::CreatureListSearcher<WoWSource::AllCreaturesOfEntryInRange> searcher(this, creatureList, check);
-    TypeContainerVisitor<WoWSource::CreatureListSearcher<WoWSource::AllCreaturesOfEntryInRange>, GridTypeMapContainer> visitor(searcher);
+    TrinityCore::AllCreaturesOfEntryInRange check(this, entry, maxSearchRange);
+    TrinityCore::CreatureListSearcher<TrinityCore::AllCreaturesOfEntryInRange> searcher(this, creatureList, check);
+    TypeContainerVisitor<TrinityCore::CreatureListSearcher<TrinityCore::AllCreaturesOfEntryInRange>, GridTypeMapContainer> visitor(searcher);
 
     cell.Visit(pair, visitor, *(this->GetMap()), *this, maxSearchRange);
 }
 
 void WorldObject::GetPlayerListInGrid(std::list<Player*>& playerList, float maxSearchRange) const
 {    
-    WoWSource::AnyPlayerInObjectRangeCheck checker(this, maxSearchRange);
-    WoWSource::PlayerListSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(this, playerList, checker);
+    TrinityCore::AnyPlayerInObjectRangeCheck checker(this, maxSearchRange);
+    TrinityCore::PlayerListSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(this, playerList, checker);
     this->VisitNearbyWorldObject(maxSearchRange, searcher);
 }
 
@@ -3154,7 +3154,7 @@ void WorldObject::GetCreatureListWithEntryInGridAppend(std::list<Creature*>& cre
 }
 
 /*
-namespace WoWSource
+namespace TrinityCore
 {
     class NearUsedPosDo
     {
@@ -3223,7 +3223,7 @@ namespace WoWSource
             float              i_angle;
             ObjectPosSelector& i_selector;
     };
-}                                                           // namespace WoWSource
+}                                                           // namespace TrinityCore
 */
 
 //===================================================================================================
@@ -3233,8 +3233,8 @@ void WorldObject::GetNearPoint2D(float &x, float &y, float distance2d, float abs
     x = GetPositionX() + (GetObjectSize() + distance2d) * std::cos(absAngle);
     y = GetPositionY() + (GetObjectSize() + distance2d) * std::sin(absAngle);
 
-    WoWSource::NormalizeMapCoord(x);
-    WoWSource::NormalizeMapCoord(y);
+    TrinityCore::NormalizeMapCoord(x);
+    TrinityCore::NormalizeMapCoord(y);
 }
 
 void WorldObject::GetNearPoint(WorldObject const* searcher, float &x, float &y, float &z, float searcher_size, float distance2d, float absAngle) const
@@ -3261,15 +3261,15 @@ void WorldObject::GetNearPoint(WorldObject const* searcher, float &x, float &y, 
 
     // adding used positions around object
     {
-        CellCoord p(WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY()));
+        CellCoord p(TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY()));
         Cell cell(p);
         cell.SetNoCreate();
 
-        WoWSource::NearUsedPosDo u_do(*this, searcher, absAngle, selector);
-        WoWSource::WorldObjectWorker<WoWSource::NearUsedPosDo> worker(this, u_do);
+        TrinityCore::NearUsedPosDo u_do(*this, searcher, absAngle, selector);
+        TrinityCore::WorldObjectWorker<TrinityCore::NearUsedPosDo> worker(this, u_do);
 
-        TypeContainerVisitor<WoWSource::WorldObjectWorker<WoWSource::NearUsedPosDo>, GridTypeMapContainer  > grid_obj_worker(worker);
-        TypeContainerVisitor<WoWSource::WorldObjectWorker<WoWSource::NearUsedPosDo>, WorldTypeMapContainer > world_obj_worker(worker);
+        TypeContainerVisitor<TrinityCore::WorldObjectWorker<TrinityCore::NearUsedPosDo>, GridTypeMapContainer  > grid_obj_worker(worker);
+        TypeContainerVisitor<TrinityCore::WorldObjectWorker<TrinityCore::NearUsedPosDo>, WorldTypeMapContainer > world_obj_worker(worker);
 
         CellLock<GridReadGuard> cell_lock(cell, p);
         cell_lock->Visit(cell_lock, grid_obj_worker,  *GetMap(), *this, distance2d);
@@ -3370,7 +3370,7 @@ void WorldObject::MovePosition(Position &pos, float dist, float angle)
     desty = pos.m_positionY + dist * std::sin(angle);
 
     // Prevent invalid coordinates here, position is unchanged
-    if (!WoWSource::IsValidMapCoord(destx, desty))
+    if (!TrinityCore::IsValidMapCoord(destx, desty))
     {
         sLog->outFatal(LOG_FILTER_GENERAL, "WorldObject::MovePosition invalid coordinates X: %f and Y: %f were passed!", destx, desty);
         return;
@@ -3401,8 +3401,8 @@ void WorldObject::MovePosition(Position &pos, float dist, float angle)
         }
     }
 
-    WoWSource::NormalizeMapCoord(pos.m_positionX);
-    WoWSource::NormalizeMapCoord(pos.m_positionY);
+    TrinityCore::NormalizeMapCoord(pos.m_positionX);
+    TrinityCore::NormalizeMapCoord(pos.m_positionY);
     UpdateGroundPositionZ(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
     pos.SetOrientation(GetOrientation());
 }
@@ -3416,7 +3416,7 @@ void WorldObject::MovePositionToFirstCollision(Position &pos, float dist, float 
     desty = pos.m_positionY + dist * std::sin(angle);
 
     // Prevent invalid coordinates here, position is unchanged
-    if (!WoWSource::IsValidMapCoord(destx, desty))
+    if (!TrinityCore::IsValidMapCoord(destx, desty))
     {
         sLog->outFatal(LOG_FILTER_GENERAL, "WorldObject::MovePositionToFirstCollision invalid coordinates X: %f and Y: %f were passed!", destx, desty);
         return;
@@ -3469,8 +3469,8 @@ void WorldObject::MovePositionToFirstCollision(Position &pos, float dist, float 
         }
     }
 
-    WoWSource::NormalizeMapCoord(pos.m_positionX);
-    WoWSource::NormalizeMapCoord(pos.m_positionY);
+    TrinityCore::NormalizeMapCoord(pos.m_positionX);
+    TrinityCore::NormalizeMapCoord(pos.m_positionY);
     UpdateAllowedPositionZ(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
     pos.SetOrientation(GetOrientation());
 }
@@ -3488,7 +3488,7 @@ void WorldObject::MovePositionToCollisionBetween(Position &pos, float distMin, f
     desty = pos.m_positionY + distMax * std::sin(angle);
 
     // Prevent invalid coordinates here, position is unchanged
-    if (!WoWSource::IsValidMapCoord(destx, desty))
+    if (!TrinityCore::IsValidMapCoord(destx, desty))
     {
         sLog->outFatal(LOG_FILTER_GENERAL, "WorldObject::MovePositionToFirstCollision invalid coordinates X: %f and Y: %f were passed!", destx, desty);
         return;
@@ -3541,8 +3541,8 @@ void WorldObject::MovePositionToCollisionBetween(Position &pos, float distMin, f
         }
     }
 
-    WoWSource::NormalizeMapCoord(pos.m_positionX);
-    WoWSource::NormalizeMapCoord(pos.m_positionY);
+    TrinityCore::NormalizeMapCoord(pos.m_positionX);
+    TrinityCore::NormalizeMapCoord(pos.m_positionY);
     UpdateAllowedPositionZ(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
     pos.SetOrientation(GetOrientation());
 }
@@ -3634,8 +3634,8 @@ void WorldObject::DestroyForNearbyPlayers()
         return;
 
     std::list<Player*> targets;
-    WoWSource::AnyPlayerInObjectRangeCheck check(this, GetVisibilityRange(), false);
-    WoWSource::PlayerListSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(this, targets, check);
+    TrinityCore::AnyPlayerInObjectRangeCheck check(this, GetVisibilityRange(), false);
+    TrinityCore::PlayerListSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(this, targets, check);
     VisitNearbyWorldObject(GetVisibilityRange(), searcher);
     for (std::list<Player*>::const_iterator iter = targets.begin(); iter != targets.end(); ++iter)
     {
@@ -3658,7 +3658,7 @@ void WorldObject::DestroyForNearbyPlayers()
 void WorldObject::UpdateObjectVisibility(bool /*forced*/)
 {
     //updates object's visibility for nearby players
-    WoWSource::VisibleChangesNotifier notifier(*this);
+    TrinityCore::VisibleChangesNotifier notifier(*this);
     VisitNearbyWorldObject(GetVisibilityRange(), notifier);
 }
 
@@ -3734,7 +3734,7 @@ struct WorldObjectChangeAccumulator
 
 void WorldObject::BuildUpdate(UpdateDataMapType& data_map)
 {
-    CellCoord p = WoWSource::ComputeCellCoord(GetPositionX(), GetPositionY());
+    CellCoord p = TrinityCore::ComputeCellCoord(GetPositionX(), GetPositionY());
     Cell cell(p);
     cell.SetNoCreate();
     WorldObjectChangeAccumulator notifier(*this, data_map);

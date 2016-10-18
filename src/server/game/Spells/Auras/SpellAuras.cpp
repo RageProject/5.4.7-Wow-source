@@ -1604,8 +1604,8 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     case 44457: // Living Bomb
                     {
                         UnitList targets;
-                        WoWSource::AnyUnitHavingBuffInObjectRangeCheck u_check(caster, caster, 300.0f, 44457, false);
-                        WoWSource::UnitListSearcher<WoWSource::AnyUnitHavingBuffInObjectRangeCheck> searcher(caster, targets, u_check);
+                        TrinityCore::AnyUnitHavingBuffInObjectRangeCheck u_check(caster, caster, 300.0f, 44457, false);
+                        TrinityCore::UnitListSearcher<TrinityCore::AnyUnitHavingBuffInObjectRangeCheck> searcher(caster, targets, u_check);
                         caster->VisitNearbyObject(300.0f, searcher);
                         if (targets.size() >= 4)
                         {
@@ -1616,7 +1616,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 
                             if (auras.size() >= 4)
                             {
-                                auras.sort(WoWSource::DurationOrderPred(false));
+                                auras.sort(TrinityCore::DurationOrderPred(false));
                                 auras.pop_front();
                                 auras.pop_front();
                                 auras.pop_front();
@@ -2735,7 +2735,7 @@ bool Aura::CallScriptCheckAreaTargetHandlers(Unit* target)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return true;
 }
@@ -2755,7 +2755,7 @@ void Aura::CallScriptDispel(DispelInfo* dispelInfo)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptAfterDispel(DispelInfo* dispelInfo)
@@ -2772,7 +2772,7 @@ void Aura::CallScriptAfterDispel(DispelInfo* dispelInfo)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 bool Aura::CallScriptEffectApplyHandlers(constAuraEffectPtr aurEff, AuraApplication const* aurApp, AuraEffectHandleModes mode)
@@ -2796,7 +2796,7 @@ bool Aura::CallScriptEffectApplyHandlers(constAuraEffectPtr aurEff, AuraApplicat
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return preventDefault;
 }
@@ -2821,7 +2821,7 @@ bool Aura::CallScriptEffectRemoveHandlers(constAuraEffectPtr aurEff, AuraApplica
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return preventDefault;
 }
@@ -2843,7 +2843,7 @@ void Aura::CallScriptAfterEffectApplyHandlers(constAuraEffectPtr aurEff, AuraApp
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptAfterEffectRemoveHandlers(constAuraEffectPtr aurEff, AuraApplication const* aurApp, AuraEffectHandleModes mode)
@@ -2863,7 +2863,7 @@ void Aura::CallScriptAfterEffectRemoveHandlers(constAuraEffectPtr aurEff, AuraAp
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 bool Aura::CallScriptEffectPeriodicHandlers(constAuraEffectPtr aurEff, AuraApplication const* aurApp)
@@ -2886,7 +2886,7 @@ bool Aura::CallScriptEffectPeriodicHandlers(constAuraEffectPtr aurEff, AuraAppli
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return preventDefault;
 }
@@ -2905,7 +2905,7 @@ void Aura::CallScriptAuraUpdateHandlers(uint32 diff)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectUpdateHandlers(uint32 diff, AuraEffectPtr aurEff)
@@ -2925,7 +2925,7 @@ void Aura::CallScriptEffectUpdateHandlers(uint32 diff, AuraEffectPtr aurEff)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectUpdatePeriodicHandlers(AuraEffectPtr aurEff)
@@ -2945,7 +2945,7 @@ void Aura::CallScriptEffectUpdatePeriodicHandlers(AuraEffectPtr aurEff)
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectCalcAmountHandlers(constAuraEffectPtr aurEff, int32 & amount, bool & canBeRecalculated)
@@ -2966,7 +2966,7 @@ void Aura::CallScriptEffectCalcAmountHandlers(constAuraEffectPtr aurEff, int32 &
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectCalcPeriodicHandlers(constAuraEffectPtr aurEff, bool & isPeriodic, int32 & amplitude)
@@ -2986,7 +2986,7 @@ void Aura::CallScriptEffectCalcPeriodicHandlers(constAuraEffectPtr aurEff, bool 
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectCalcSpellModHandlers(constAuraEffectPtr aurEff, SpellModifier* & spellMod)
@@ -3006,7 +3006,7 @@ void Aura::CallScriptEffectCalcSpellModHandlers(constAuraEffectPtr aurEff, Spell
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectAbsorbHandlers(AuraEffectPtr aurEff, AuraApplication const* aurApp, DamageInfo & dmgInfo, uint32 & absorbAmount, bool& defaultPrevented)
@@ -3028,7 +3028,7 @@ void Aura::CallScriptEffectAbsorbHandlers(AuraEffectPtr aurEff, AuraApplication 
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectAfterAbsorbHandlers(AuraEffectPtr aurEff, AuraApplication const* aurApp, DamageInfo & dmgInfo, uint32 & absorbAmount)
@@ -3049,7 +3049,7 @@ void Aura::CallScriptEffectAfterAbsorbHandlers(AuraEffectPtr aurEff, AuraApplica
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectManaShieldHandlers(AuraEffectPtr aurEff, AuraApplication const* aurApp, DamageInfo & dmgInfo, uint32 & absorbAmount, bool & /*defaultPrevented*/)
@@ -3069,7 +3069,7 @@ void Aura::CallScriptEffectManaShieldHandlers(AuraEffectPtr aurEff, AuraApplicat
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptEffectAfterManaShieldHandlers(AuraEffectPtr aurEff, AuraApplication const* aurApp, DamageInfo & dmgInfo, uint32 & absorbAmount)
@@ -3090,7 +3090,7 @@ void Aura::CallScriptEffectAfterManaShieldHandlers(AuraEffectPtr aurEff, AuraApp
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::SetScriptData(uint32 type, uint32 data)
@@ -3120,7 +3120,7 @@ bool Aura::CallScriptCheckProcHandlers(AuraApplication const* aurApp, ProcEventI
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
     return true;
 }
 
@@ -3142,7 +3142,7 @@ bool Aura::CallScriptPrepareProcHandlers(AuraApplication const* aurApp, ProcEven
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return prepare;
 }
@@ -3161,7 +3161,7 @@ void Aura::CallScriptProcHandlers(AuraApplication const* aurApp, ProcEventInfo& 
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 void Aura::CallScriptAfterProcHandlers(AuraApplication const* aurApp, ProcEventInfo& eventInfo)
@@ -3178,7 +3178,7 @@ void Aura::CallScriptAfterProcHandlers(AuraApplication const* aurApp, ProcEventI
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 bool Aura::CallScriptEffectProcHandlers(constAuraEffectPtr aurEff, AuraApplication const* aurApp, ProcEventInfo& eventInfo)
@@ -3201,7 +3201,7 @@ bool Aura::CallScriptEffectProcHandlers(constAuraEffectPtr aurEff, AuraApplicati
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 
     return preventDefault;
 }
@@ -3223,7 +3223,7 @@ void Aura::CallScriptAfterEffectProcHandlers(constAuraEffectPtr aurEff, AuraAppl
 
     scriptExecuteTime = getMSTime() - scriptExecuteTime;
     if (scriptExecuteTime > 15)
-        sLog->OutPandashan("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
+        sLog->OutTrinityCore("AuraScript [%u] take more than 15 ms to execute (%u ms)", GetId(), scriptExecuteTime);
 }
 
 UnitAura::UnitAura(SpellInfo const* spellproto, uint32 effMask, WorldObject* owner, Unit* caster, SpellPowerEntry const* spellPowerData, int32 *baseAmount, Item* castItem, uint64 casterGUID)
@@ -3282,16 +3282,16 @@ void UnitAura::FillTargetMap(std::map<Unit*, uint32> & targets, Unit* caster)
                     case SPELL_EFFECT_APPLY_AREA_AURA_RAID:
                     {
                         targetList.push_back(GetUnitOwner());
-                        WoWSource::AnyGroupedUnitInObjectRangeCheck u_check(GetUnitOwner(), GetUnitOwner(), radius, GetSpellInfo()->Effects[effIndex].Effect == SPELL_EFFECT_APPLY_AREA_AURA_RAID);
-                        WoWSource::UnitListSearcher<WoWSource::AnyGroupedUnitInObjectRangeCheck> searcher(GetUnitOwner(), targetList, u_check);
+                        TrinityCore::AnyGroupedUnitInObjectRangeCheck u_check(GetUnitOwner(), GetUnitOwner(), radius, GetSpellInfo()->Effects[effIndex].Effect == SPELL_EFFECT_APPLY_AREA_AURA_RAID);
+                        TrinityCore::UnitListSearcher<TrinityCore::AnyGroupedUnitInObjectRangeCheck> searcher(GetUnitOwner(), targetList, u_check);
                         GetUnitOwner()->VisitNearbyObject(radius, searcher);
                         break;
                     }
                     case SPELL_EFFECT_APPLY_AREA_AURA_FRIEND:
                     {
                         targetList.push_back(GetUnitOwner());
-                        WoWSource::AnyFriendlyUnitInObjectRangeCheck u_check(GetUnitOwner(), GetUnitOwner(), radius);
-                        WoWSource::UnitListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(GetUnitOwner(), targetList, u_check);
+                        TrinityCore::AnyFriendlyUnitInObjectRangeCheck u_check(GetUnitOwner(), GetUnitOwner(), radius);
+                        TrinityCore::UnitListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(GetUnitOwner(), targetList, u_check);
                         GetUnitOwner()->VisitNearbyObject(radius, searcher);
                         break;
                     }
@@ -3299,8 +3299,8 @@ void UnitAura::FillTargetMap(std::map<Unit*, uint32> & targets, Unit* caster)
                     {
                         if (GetCaster() && GetCaster()->IsInWorld())
                         {
-                            WoWSource::AnyAoETargetUnitInObjectRangeCheck u_check(GetCaster(), GetCaster(), radius); // No GetCharmer in searcher
-                            WoWSource::UnitListSearcher<WoWSource::AnyAoETargetUnitInObjectRangeCheck> searcher(GetCaster(), targetList, u_check);
+                            TrinityCore::AnyAoETargetUnitInObjectRangeCheck u_check(GetCaster(), GetCaster(), radius); // No GetCharmer in searcher
+                            TrinityCore::UnitListSearcher<TrinityCore::AnyAoETargetUnitInObjectRangeCheck> searcher(GetCaster(), targetList, u_check);
                             GetCaster()->VisitNearbyObject(radius, searcher);
                         }
                         else
@@ -3363,14 +3363,14 @@ void DynObjAura::FillTargetMap(std::map<Unit*, uint32> & targets, Unit* /*caster
         if (GetSpellInfo()->Effects[effIndex].TargetB.GetTarget() == TARGET_DEST_DYNOBJ_ALLY
             || GetSpellInfo()->Effects[effIndex].TargetB.GetTarget() == TARGET_UNIT_DEST_AREA_ALLY)
         {
-            WoWSource::AnyFriendlyUnitInObjectRangeCheck u_check(GetDynobjOwner(), dynObjOwnerCaster, radius);
-            WoWSource::UnitListSearcher<WoWSource::AnyFriendlyUnitInObjectRangeCheck> searcher(GetDynobjOwner(), targetList, u_check);
+            TrinityCore::AnyFriendlyUnitInObjectRangeCheck u_check(GetDynobjOwner(), dynObjOwnerCaster, radius);
+            TrinityCore::UnitListSearcher<TrinityCore::AnyFriendlyUnitInObjectRangeCheck> searcher(GetDynobjOwner(), targetList, u_check);
             GetDynobjOwner()->VisitNearbyObject(radius, searcher);
         }
         else if (GetSpellInfo()->Effects[effIndex].Effect != SPELL_EFFECT_CREATE_AREATRIGGER)
         {
-            WoWSource::AnyAoETargetUnitInObjectRangeCheck u_check(GetDynobjOwner(), dynObjOwnerCaster, radius);
-            WoWSource::UnitListSearcher<WoWSource::AnyAoETargetUnitInObjectRangeCheck> searcher(GetDynobjOwner(), targetList, u_check);
+            TrinityCore::AnyAoETargetUnitInObjectRangeCheck u_check(GetDynobjOwner(), dynObjOwnerCaster, radius);
+            TrinityCore::UnitListSearcher<TrinityCore::AnyAoETargetUnitInObjectRangeCheck> searcher(GetDynobjOwner(), targetList, u_check);
             GetDynobjOwner()->VisitNearbyObject(radius, searcher);
         }
 

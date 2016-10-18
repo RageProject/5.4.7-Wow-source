@@ -2037,7 +2037,7 @@ class spell_dru_swiftmend_heal : public SpellScriptLoader
 
                 targets.clear();
 
-                unitList.sort(WoWSource::HealthPctOrderPred());
+                unitList.sort(TrinityCore::HealthPctOrderPred());
                 unitList.resize(3);
 
                 for (auto itr : unitList)
@@ -2810,7 +2810,7 @@ class spell_dru_t10_restoration_4p_bonus : public SpellScriptLoader
                         return;
                     }
 
-                    Unit* target = WoWSource::Containers::SelectRandomContainerElement(tempTargets);
+                    Unit* target = TrinityCore::Containers::SelectRandomContainerElement(tempTargets);
                     targets.clear();
                     targets.push_back(target);
                 }
@@ -2873,7 +2873,7 @@ class spell_dru_starfall_dummy : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                WoWSource::Containers::RandomResizeList(targets, 2);
+                TrinityCore::Containers::RandomResizeList(targets, 2);
             }
 
             void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -3110,7 +3110,7 @@ class spell_dru_yseras_gift : public SpellScriptLoader
 
                                 if (!alliesList.empty())
                                 {
-                                    alliesList.sort(WoWSource::HealthPctOrderPred());
+                                    alliesList.sort(TrinityCore::HealthPctOrderPred());
 
                                     Unit* healTarget = alliesList.front();
                                     basepoints = _player->CountPctFromMaxHealth(5);

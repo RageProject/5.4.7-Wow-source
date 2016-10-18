@@ -58,7 +58,7 @@ class ResultSet
         MYSQL_FIELD* _fields;
 };
 
-typedef WoWSource::AutoPtr<ResultSet, ACE_Thread_Mutex> QueryResult;
+typedef TrinityCore::AutoPtr<ResultSet, ACE_Thread_Mutex> QueryResult;
 
 class PreparedResultSet
 {
@@ -103,7 +103,7 @@ class PreparedResultSet
 
 };
 
-typedef WoWSource::AutoPtr<PreparedResultSet, ACE_Thread_Mutex> PreparedQueryResult;
+typedef TrinityCore::AutoPtr<PreparedResultSet, ACE_Thread_Mutex> PreparedQueryResult;
 
 #endif
 

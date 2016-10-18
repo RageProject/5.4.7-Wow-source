@@ -954,7 +954,7 @@ class boss_ragnaros_firelands : public CreatureScript
                                 t_pos.push_back(floorPos[i]);
 
                             if (t_pos.size() > max)
-                                WoWSource::Containers::RandomResizeList(t_pos, max);
+                                TrinityCore::Containers::RandomResizeList(t_pos, max);
 
                             if (!t_pos.empty())
                                 for (std::list<Position>::const_iterator itr = t_pos.begin(); itr != t_pos.end(); ++itr)
@@ -2063,7 +2063,7 @@ class npc_ragnaros_firelands_dreadflame_spawn : public CreatureScript
                         {
                             UnitList targets;
                             CloudburstCheck check(me);
-                            WoWSource::UnitListSearcher<CloudburstCheck> searcher(me, targets, check);
+                            TrinityCore::UnitListSearcher<CloudburstCheck> searcher(me, targets, check);
                             me->VisitNearbyObject(3.0f, searcher);
                             if (!targets.empty())
                             {
@@ -2143,8 +2143,8 @@ class npc_ragnaros_firelands_dreadflame : public CreatureScript
                         case EVENT_CHECK_TARGET:
                         {
                             std::list<Player*> targets;
-                            WoWSource::AnyPlayerInObjectRangeCheck check(me, 3.0f, true);
-                            WoWSource::PlayerListSearcher<WoWSource::AnyPlayerInObjectRangeCheck> searcher(me, targets, check);
+                            TrinityCore::AnyPlayerInObjectRangeCheck check(me, 3.0f, true);
+                            TrinityCore::PlayerListSearcher<TrinityCore::AnyPlayerInObjectRangeCheck> searcher(me, targets, check);
                             me->VisitNearbyObject(3.0f, searcher);
                             if (!targets.empty())
                             {
@@ -2161,7 +2161,7 @@ class npc_ragnaros_firelands_dreadflame : public CreatureScript
                         {
                             UnitList targets;
                             CloudburstCheck check(me);
-                            WoWSource::UnitListSearcher<CloudburstCheck> searcher(me, targets, check);
+                            TrinityCore::UnitListSearcher<CloudburstCheck> searcher(me, targets, check);
                             me->VisitNearbyObject(3.0f, searcher);
                             if (!targets.empty())
                             {
@@ -2267,7 +2267,7 @@ class spell_ragnaros_firelands_wrath_of_ragnaros_aoe : public SpellScriptLoader
                 if (!targets.empty())
                 {
                     uint32 max_size = (GetCaster()->GetMap()->Is25ManRaid() ? 3 : 1);
-                    WoWSource::Containers::RandomResizeList(targets, max_size);
+                    TrinityCore::Containers::RandomResizeList(targets, max_size);
                 }
             }
 
@@ -2329,10 +2329,10 @@ class spell_ragnaros_firelands_magma_trap_aoe : public SpellScriptLoader
                 if (!tempList.empty())
                 {
                     targets.clear();
-                    targets.push_back(WoWSource::Containers::SelectRandomContainerElement(tempList));
+                    targets.push_back(TrinityCore::Containers::SelectRandomContainerElement(tempList));
                 }
                 else
-                    WoWSource::Containers::RandomResizeList(targets, 1);
+                    TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void HandleDummy(SpellEffIndex effIndex)
@@ -2379,10 +2379,10 @@ class spell_ragnaros_firelands_sulfuras_smash_aoe : public SpellScriptLoader
                 if (!tempList.empty())
                 {
                     targets.clear();
-                    targets.push_back(WoWSource::Containers::SelectRandomContainerElement(tempList));
+                    targets.push_back(TrinityCore::Containers::SelectRandomContainerElement(tempList));
                 }
                 else
-                    WoWSource::Containers::RandomResizeList(targets, 1);
+                    TrinityCore::Containers::RandomResizeList(targets, 1);
             }
 
             void Register()

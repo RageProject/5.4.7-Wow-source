@@ -257,7 +257,7 @@ class ThreatManager
 
 //=================================================
 
-namespace WoWSource
+namespace TrinityCore
 {
     // Binary predicate for sorting HostileReferences based on threat value
     class ThreatOrderPred

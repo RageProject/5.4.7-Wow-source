@@ -708,16 +708,27 @@ void AddSC_spine_of_deathwing();
 void AddSC_madness_of_deathwing();
 
 // Pandaria
+// Heart of Fear
+void AddSC_instance_heart_of_fear();
+void AddSC_boss_ambershaper_unsok();
+void AddSC_boss_blade_lord_tayak();
+void AddSC_boss_garalon();
+void AddSC_boss_grand_empress_shekzeer();
+void AddSC_boss_imperial_vizier_zorlok();
+void AddSC_boss_wind_lord_meljarak();
+
 void AddSC_instance_temple_of_jade_serpent();       // Temple of Jade Serpent
 void AddSC_boss_wise_mari();
 void AddSC_boss_lorewalker_stonestep();
 void AddSC_boss_liu_flameheat();
 void AddSC_boss_sha_of_doubt();
+
 void AddSC_boss_hoptallus();           // The Stormstout Brewery
 void AddSC_boss_ook_ook();
 void AddSC_boss_yan_zhu_the_uncasked();
 void AddSC_instance_stormstout_brewery();
 void AddSC_stormstout_brewery();
+
 void AddSC_instance_gate_setting_sun();             // Gate of the Setting Sun
 void AddSC_gate_setting_sun();
 void AddSC_boss_saboteur_kiptilak();
@@ -729,19 +740,23 @@ void AddSC_boss_galion();
 void AddSC_boss_chi_ji();
 void AddSC_boss_nalak();
 void AddSC_boss_ordos();
+
 void AddSC_instance_mogu_shan_palace();             // Mogu'Shan Palace
 void AddSC_boss_trial_of_the_king();
 void AddSC_boss_gekkan();
 void AddSC_boss_xin_the_weaponmaster();
+
 void AddSC_instance_shadopan_monastery();           // Shadopan Monastery
 void AddSC_shadopan_monastery();
 void AddSC_boss_gu_cloudstrike();
 void AddSC_boss_master_snowdrift();
 void AddSC_boss_sha_of_violence();
 void AddSC_boss_taran_zhu();
+
 void AddSC_instance_siege_of_the_niuzoa_temple();   // Siege of the Niuzoa Temple
 void AddSC_siege_of_the_niuzoa_temple();
 void AddSC_boss_jinbak();
+
 void AddSC_instance_mogu_shan_vault();              // Mogu'Shan Vault
 void AddSC_mogu_shan_vault();
 void AddSC_boss_stone_guard();
@@ -750,6 +765,13 @@ void AddSC_boss_garajal();
 void AddSC_boss_spirit_kings();
 void AddSC_boss_elegon();
 void AddSC_boss_will_of_emperor();
+
+// Terrace of Endless Spring
+void AddSC_instance_terrace_of_the_endless_spring();
+void AddSC_boss_lei_shi();
+void AddSC_boss_protectors_of_the_endless();
+void AddSC_boss_sha_of_fear();
+void AddSC_boss_tsulong();
 
 void AddSC_townlong_steppes();
 void AddSC_dread_wastes();
@@ -1504,40 +1526,56 @@ void AddNorthrendScripts()
 void AddPandarieScripts()
 {
 #ifdef SCRIPTS
+// Heart of Fear
+	AddSC_instance_heart_of_fear();
+	AddSC_boss_ambershaper_unsok();
+	AddSC_boss_blade_lord_tayak();
+	AddSC_boss_garalon();
+	AddSC_boss_grand_empress_shekzeer();
+	AddSC_boss_imperial_vizier_zorlok();
+	AddSC_boss_wind_lord_meljarak();
+	
     AddSC_instance_temple_of_jade_serpent();        // Temple of Jade Serpent
     AddSC_boss_wise_mari();
     AddSC_boss_lorewalker_stonestep();
     AddSC_boss_liu_flameheat();
     AddSC_boss_sha_of_doubt();
+
     AddSC_boss_hoptallus();           // The Stormstout Brewery
     AddSC_boss_ook_ook();
     AddSC_boss_yan_zhu_the_uncasked();
     AddSC_instance_stormstout_brewery();
     AddSC_stormstout_brewery();
+
     AddSC_instance_mogu_shan_palace();              // The Mogu'Shan Palace
     AddSC_boss_trial_of_the_king();
     AddSC_boss_gekkan();
     AddSC_boss_xin_the_weaponmaster();
+
     AddSC_instance_gate_setting_sun();              // Gate of the Setting Sun
     AddSC_gate_setting_sun();
     AddSC_boss_saboteur_kiptilak();
     AddSC_boss_striker_gadok();
     AddSC_boss_commander_rimok();
     AddSC_boss_raigonn();
+
     AddSC_boss_sha_of_anger();                      // Pandaria World Bosses
     AddSC_boss_galion();
     AddSC_boss_chi_ji();
     AddSC_boss_nalak();
     AddSC_boss_ordos();
+
     AddSC_instance_shadopan_monastery();            // Shadopan Monastery
     AddSC_shadopan_monastery();
     AddSC_boss_gu_cloudstrike();
     AddSC_boss_master_snowdrift();
     AddSC_boss_sha_of_violence();
     AddSC_boss_taran_zhu();
+
     AddSC_instance_siege_of_the_niuzoa_temple();    // Siege of the Niuzoa Temple
     AddSC_siege_of_the_niuzoa_temple();
     AddSC_boss_jinbak();
+
     AddSC_instance_mogu_shan_vault();               // Mogu'Shan Vault
     AddSC_mogu_shan_vault();
     AddSC_boss_stone_guard();
@@ -1547,6 +1585,12 @@ void AddPandarieScripts()
     AddSC_boss_elegon();
     AddSC_boss_will_of_emperor();
 
+	// Terrace of Endless Spring
+	AddSC_instance_terrace_of_the_endless_spring();
+	AddSC_boss_lei_shi();
+	AddSC_boss_protectors_of_the_endless();
+	AddSC_boss_sha_of_fear();
+	AddSC_boss_tsulong();
 
     AddSC_townlong_steppes();
     AddSC_dread_wastes();
@@ -1583,11 +1627,15 @@ void AddBattlegroundScripts()
 #ifdef SCRIPTS
 /* This is where custom scripts' loading functions should be declared. */
 
+void AddSC_DuelReset();
+
 #endif
 
 void AddCustomScripts()
 {
 #ifdef SCRIPTS
+
+	AddSC_DuelReset();
 
 #endif
 }
